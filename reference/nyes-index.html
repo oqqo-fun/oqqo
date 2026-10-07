@@ -1,0 +1,1448 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<meta charset="utf-8">
+<title>NYES · 90-second markets on Solana</title>
+<meta name="description" content="Explore NYES: short YES/NO markets on Solana, shared USDC pools and transparent settlement. Try the interactive demo.">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="NYES">
+<meta property="og:title" content="NYES · 90-second markets on Solana">
+<meta property="og:description" content="Explore NYES: short YES/NO markets on Solana, shared USDC pools and transparent settlement. Try the interactive demo.">
+<meta property="og:url" content="https://www.nyes.fun/">
+<meta property="og:image" content="https://www.nyes.fun/assets/nyes-social-banner.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="NYES · 90-second markets on Solana">
+<meta name="twitter:description" content="Explore NYES: short YES/NO markets on Solana, shared USDC pools and transparent settlement. Try the interactive demo.">
+<meta name="twitter:image" content="https://www.nyes.fun/assets/nyes-social-banner.png">
+<link rel="canonical" href="https://www.nyes.fun/">
+<meta name="robots" content="index, follow, max-image-preview:large">
+<script type="application/ld+json" id="nyes-seo">{"@context": "https://schema.org", "@graph": [{"@type": "WebPage", "@id": "https://www.nyes.fun/#webpage", "url": "https://www.nyes.fun/", "name": "NYES · 90-second markets on Solana", "description": "Explore NYES: short YES/NO markets on Solana, shared USDC pools and transparent settlement. Try the interactive demo.", "inLanguage": "en", "isPartOf": {"@id": "https://www.nyes.fun/#website"}}, {"@type": "WebSite", "@id": "https://www.nyes.fun/#website", "url": "https://www.nyes.fun/", "name": "NYES"}, {"@type": "Organization", "@id": "https://www.nyes.fun/#organization", "name": "NYES", "url": "https://www.nyes.fun/", "logo": "https://www.nyes.fun/assets/nyes-avatar-180.png"}]}</script>
+<script>window.__resources = {"https://unpkg.com/react@18.3.1/umd/react.production.min.js": "/assets/bundle/d949f1c3687aedad.js", "https://unpkg.com/react-dom@18.3.1/umd/react-dom.production.min.js": "/assets/bundle/35f4f974f4b2bcd4.js"};</script>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#ffffff">
+<link rel="icon" type="image/png" href="/assets/bundle/eed3ecc90a8c2609.png">
+<link rel="apple-touch-icon" href="/assets/bundle/2b91a7bb64df2020.png">
+<style>/* Shared additions to the original exported design. */
+.nyes-brand { display:inline-flex; align-items:center; gap:10px; flex-shrink:0; }
+.nyes-brand img { display:block; width:36px; height:36px; border-radius:50%; }
+.nyes-brand-footer img { width:64px; height:64px; }
+.nyes-mobile-menu { display:none; position:relative; }
+.nyes-mobile-menu summary { cursor:pointer; list-style:none; display:grid; place-items:center; width:44px; height:44px; margin-right:-10px; color:#0b0c0e; }
+.nyes-mobile-menu summary::-webkit-details-marker { display:none; }
+.nyes-burger { position:relative; width:20px; height:10px; display:block; }
+.nyes-burger span { position:absolute; left:0; right:0; height:1.5px; background:#0b0c0e; transition:transform .25s ease, top .25s ease; }
+.nyes-burger span:first-child { top:0; }
+.nyes-burger span:last-child { top:8.5px; }
+.nyes-mobile-menu[open] .nyes-burger span:first-child { top:4.25px; transform:rotate(45deg); }
+.nyes-mobile-menu[open] .nyes-burger span:last-child { top:4.25px; transform:rotate(-45deg); }
+.nyes-mobile-menu nav { position:absolute; right:-10px; top:52px; min-width:190px; display:grid; gap:2px; padding:12px; background:#ffffff; border:1px solid #e3e3df; border-radius:16px; box-shadow:0 24px 48px -16px rgba(0,0,0,.18); z-index:60; }
+.nyes-mobile-menu nav a { display:block; padding:12px 10px; font-size:15px; }
+.nyes-preview-note { font:12px/1.5 'Geist Mono',monospace; color:#6b6e74; }
+.nyes-skip { position:fixed; top:8px; left:8px; padding:12px 16px; background:#0b0c0e; color:#ffffff; border-radius:999px; z-index:200; transform:translateY(-150%); }
+.nyes-skip:focus { transform:none; }
+:focus-visible { outline:2px solid #0b0c0e !important; outline-offset:4px; }
+button:disabled { cursor:not-allowed !important; opacity:.55; }
+.nyes-dialog { max-height:calc(100dvh - 48px); overflow-y:auto; overscroll-behavior:contain; }
+.nyes-docs-row > * { min-width:0; overflow-wrap:anywhere; }
+@media(max-width:899px) {
+  .nyes-docs-page .nyes-mobile-menu { display:block; }
+}
+@media(max-width:819px) {
+  .nyes-mobile-menu { display:block; }
+  .nyes-header-inner { padding-left:20px !important; padding-right:20px !important; gap:12px !important; }
+  .nyes-header-inner > nav { gap:14px !important; }
+  .nyes-header-brand { gap:10px !important; }
+}
+@media(max-width:600px) {
+  .nyes-invite-badge, .nyes-docs-version { display:none; }
+  .nyes-shell { padding-left:20px !important; padding-right:20px !important; }
+  section > .nyes-shell { padding-top:64px !important; padding-bottom:64px !important; gap:40px !important; }
+  #top > .nyes-shell { padding-top:40px !important; padding-bottom:56px !important; }
+  #top h1 { font-size:clamp(44px,11.9vw,68px) !important; }
+  .nyes-clock { font-size:clamp(64px,21vw,100px) !important; }
+  .nyes-market-mint { display:none; }
+  .nyes-market-stage { min-height:620px !important; }
+  .nyes-dialog input { font-size:16px !important; }
+  .nyes-docs-row { grid-template-columns:minmax(0,1fr) !important; gap:6px !important; }
+  .nyes-docs-content { padding-top:40px !important; }
+  .nyes-docs-content section { overflow-wrap:anywhere; }
+}
+@media(max-width:460px) {
+  .nyes-docs-label, .nyes-docs-divider { display:none; }
+  .nyes-header-inner > nav > a { padding:0 10px !important; font-size:12px !important; }
+}
+/* polish */
+body { font-kerning:normal; font-feature-settings:"kern","liga","calt"; text-rendering:optimizeLegibility; font-synthesis:none; }
+h1, h2, h3 { text-wrap:balance; font-feature-settings:"kern","liga","calt","ss01"; }
+p { text-wrap:pretty; hanging-punctuation:first; }
+[style*="Geist Mono"] { font-variant-numeric:tabular-nums slashed-zero; }
+a, button, summary { -webkit-tap-highlight-color:transparent; transition:color .18s cubic-bezier(.16,1,.3,1), background-color .18s cubic-bezier(.16,1,.3,1), border-color .18s cubic-bezier(.16,1,.3,1); }
+::-webkit-scrollbar { width:10px; height:10px; } ::-webkit-scrollbar-track { background:#ffffff; } ::-webkit-scrollbar-thumb { background:#d4d4cf; border:2px solid #ffffff; border-radius:6px; } ::-webkit-scrollbar-thumb:hover { background:#b9bab5; }
+html { scrollbar-color:#d4d4cf #ffffff; }
+#nyes-loader { position:fixed; inset:0; z-index:500; background:#ffffff; display:grid; place-items:center; transition:opacity .5s cubic-bezier(.16,1,.3,1), visibility .5s; }
+#nyes-loader.out { opacity:0; visibility:hidden; }
+#nyes-loader .ring { position:relative; width:112px; height:112px; border-radius:50%; background:repeating-conic-gradient(rgba(11,12,14,.16) 0deg 1.2deg, transparent 1.2deg 6deg); -webkit-mask:radial-gradient(circle closest-side, transparent 86%, #000 87%, #000 99%, transparent 100%); mask:radial-gradient(circle closest-side, transparent 86%, #000 87%, #000 99%, transparent 100%); }
+#nyes-loader .sweep { position:absolute; inset:0; border-radius:50%; background:conic-gradient(#0b0c0e 0deg var(--a,0deg), transparent var(--a,0deg)); -webkit-mask:repeating-conic-gradient(#000 0deg 1.2deg, transparent 1.2deg 6deg); mask:repeating-conic-gradient(#000 0deg 1.2deg, transparent 1.2deg 6deg); }
+#nyes-loader img { position:absolute; left:50%; top:50%; width:56px; height:56px; transform:translate(-50%,-50%); border-radius:50%; }
+#nyes-loader .wrap { position:relative; width:112px; height:112px; }
+@property --a { syntax:'<angle>'; inherits:false; initial-value:0deg; }
+
+/* responsive pass */
+html, body { overflow-x:clip; }
+img, svg, video { max-width:100%; }
+.nyes-hero-note > span { white-space:nowrap; }
+.nyes-foot-nav a { display:inline-flex; align-items:center; min-height:44px; }
+@media(max-width:1023px) {
+  .nyes-close-rings { right:-340px !important; opacity:.55; }
+}
+@media(max-width:819px) {
+  .nyes-tape-scroll { overflow-x:visible !important; }
+  .nyes-tape { min-width:0 !important; }
+  .nyes-tape-head { display:none !important; }
+  .nyes-tape-row { grid-template-columns:minmax(0,1fr) auto !important; gap:8px 16px !important; padding:16px 4px !important; }
+  .nyes-tape-mkt { grid-column:1 / -1; order:1; }
+  .nyes-tape-clock { order:2; font-size:13px; }
+  .nyes-tape-res { order:3; }
+  .nyes-tape-pool { order:4; grid-column:1 / -1; }
+  .nyes-tape-pool > span:first-child { min-width:0 !important; }
+  .nyes-tape-pool > span:last-child { max-width:none !important; }
+  .nyes-tape-row + div { margin-left:0 !important; margin-right:0 !important; }
+  .nyes-close-rings { width:620px !important; height:620px !important; right:-300px !important; top:auto !important; bottom:-260px; transform:none !important; opacity:.45; }
+  .nyes-close-rings img { width:200px !important; height:200px !important; }
+}
+@media(max-width:600px) {
+  .nyes-sides { gap:8px !important; padding-left:16px !important; padding-right:16px !important; }
+  .nyes-side { height:68px !important; padding:0 14px !important; }
+  .nyes-side > span:nth-last-child(1) { font-size:26px !important; }
+  .nyes-side > span:nth-last-child(2) { font-size:18px !important; }
+  .nyes-chip { padding:0 9px !important; font-size:11.5px !important; }
+  .nyes-tape-mint { display:none; }
+  .nyes-code { white-space:pre-wrap !important; word-break:break-all; font-size:12.5px !important; line-height:1.8 !important; }
+  .nyes-peek-id { display:none; }
+  .nyes-dialog { max-height:calc(100dvh - 24px); }
+}
+@media(max-width:600px) {
+  .nyes-dialog { width:100% !important; max-width:100% !important; }
+  .nyes-dialog * { min-width:0; }
+  .nyes-docs-content div[style*="justify-content:space-between"] > span:last-child { white-space:nowrap; }
+  .nyes-docs-content [style*="white-space:pre"] { white-space:pre-wrap !important; word-break:break-word; }
+  .nyes-docs-content section + section { margin-top:64px !important; padding-top:40px !important; }
+  #api > div:first-child { flex-wrap:wrap; }
+}
+@media(max-width:380px) {
+  .nyes-side > span:nth-last-child(1) { font-size:22px !important; }
+  #top h1 { font-size:clamp(40px,12.4vw,60px) !important; }
+}
+@media(prefers-reduced-motion:reduce) {
+  html { scroll-behavior:auto !important; }
+  *, *::before, *::after { scroll-behavior:auto !important; transition:none !important; }
+}
+
+/* light theme · landing stage */
+.nyes-stage-phone { display:none; }
+@media(min-width:1180px) { .nyes-stage-phone { display:block; } .nyes-stage-win { margin-right:250px !important; margin-left:0 !important; } }
+@media(max-width:760px) { .nyes-stage { padding:24px 12px 0 !important; border-radius:22px !important; } .nyes-stage-side { display:none !important; } }
+@media(max-width:900px) { .nyes-header-inner { padding-left:24px !important; padding-right:24px !important; } }
+@media(max-width:600px) { .nyes-header-inner { padding-left:20px !important; padding-right:20px !important; } }
+
+.nyes-main-nav { display:flex; }
+@media(max-width:819px) { .nyes-main-nav { display:none !important; } }
+@media(max-width:899px) { .nyes-docs-page .nyes-main-nav { display:none !important; } }
+</style>
+<style>html.nyes-enter header ~ *{opacity:0!important}html.nyes-enter,html.nyes-anim{overflow-x:clip}html.nyes-enter body,html.nyes-anim body{overflow-x:clip}</style>
+<script src="/assets/bundle/1b3791837a68e824.js"></script>
+<script src="/assets/bundle/047a42b723d869d5.js"></script>
+
+</head>
+<body>
+<x-dc>
+<a class="nyes-skip" href="#top">Skip to content</a>
+<helmet>
+<title>NYES · 90-second markets on Solana</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com">
+<style>/* cyrillic-ext */
+@font-face {
+  font-family: 'Geist';
+  font-style: normal;
+  font-weight: 300 800;
+  font-display: swap;
+  src: url("/assets/bundle/2317fa4bb293c9c0.woff2") format('woff2');
+  unicode-range: U+0460-052F, U+1C80-1C8A, U+20B4, U+2DE0-2DFF, U+A640-A69F, U+FE2E-FE2F;
+}
+/* cyrillic */
+@font-face {
+  font-family: 'Geist';
+  font-style: normal;
+  font-weight: 300 800;
+  font-display: swap;
+  src: url("/assets/bundle/6894439694946a58.woff2") format('woff2');
+  unicode-range: U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
+}
+/* vietnamese */
+@font-face {
+  font-family: 'Geist';
+  font-style: normal;
+  font-weight: 300 800;
+  font-display: swap;
+  src: url("/assets/bundle/8fa40e5d24824773.woff2") format('woff2');
+  unicode-range: U+0102-0103, U+0110-0111, U+0128-0129, U+0168-0169, U+01A0-01A1, U+01AF-01B0, U+0300-0301, U+0303-0304, U+0308-0309, U+0323, U+0329, U+1EA0-1EF9, U+20AB;
+}
+/* latin-ext */
+@font-face {
+  font-family: 'Geist';
+  font-style: normal;
+  font-weight: 300 800;
+  font-display: swap;
+  src: url("/assets/bundle/824f485b5d26e2f2.woff2") format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+/* latin */
+@font-face {
+  font-family: 'Geist';
+  font-style: normal;
+  font-weight: 300 800;
+  font-display: swap;
+  src: url("/assets/bundle/19f9c92546aa300c.woff2") format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+/* cyrillic-ext */
+@font-face {
+  font-family: 'Geist Mono';
+  font-style: normal;
+  font-weight: 400 600;
+  font-display: swap;
+  src: url("/assets/bundle/cd8800999070b729.woff2") format('woff2');
+  unicode-range: U+0460-052F, U+1C80-1C8A, U+20B4, U+2DE0-2DFF, U+A640-A69F, U+FE2E-FE2F;
+}
+/* cyrillic */
+@font-face {
+  font-family: 'Geist Mono';
+  font-style: normal;
+  font-weight: 400 600;
+  font-display: swap;
+  src: url("/assets/bundle/4866787fc952dbdb.woff2") format('woff2');
+  unicode-range: U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
+}
+/* symbols2 */
+@font-face {
+  font-family: 'Geist Mono';
+  font-style: normal;
+  font-weight: 400 600;
+  font-display: swap;
+  src: url("/assets/bundle/5bb66d8319ba1602.woff2") format('woff2');
+  unicode-range: U+2000-2001, U+2004-2008, U+200A, U+23B8-23BD, U+2500-259F;
+}
+/* vietnamese */
+@font-face {
+  font-family: 'Geist Mono';
+  font-style: normal;
+  font-weight: 400 600;
+  font-display: swap;
+  src: url("/assets/bundle/d39b60889a94a527.woff2") format('woff2');
+  unicode-range: U+0102-0103, U+0110-0111, U+0128-0129, U+0168-0169, U+01A0-01A1, U+01AF-01B0, U+0300-0301, U+0303-0304, U+0308-0309, U+0323, U+0329, U+1EA0-1EF9, U+20AB;
+}
+/* latin-ext */
+@font-face {
+  font-family: 'Geist Mono';
+  font-style: normal;
+  font-weight: 400 600;
+  font-display: swap;
+  src: url("/assets/bundle/1a189eb997c3e2ec.woff2") format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+/* latin */
+@font-face {
+  font-family: 'Geist Mono';
+  font-style: normal;
+  font-weight: 400 600;
+  font-display: swap;
+  src: url("/assets/bundle/684ad5b531f81d43.woff2") format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+</style>
+<style>
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;background:#ffffff}
+body{margin:0;background:#ffffff;color:#0b0c0e;-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility}
+a{color:#0b0c0e;text-decoration:none}
+a:hover{color:#5f6268}
+::selection{background:#d6ff3f;color:#0b0c0e}
+button{font:inherit}
+</style>
+<script src="/assets/bundle/fff26d081c8d9d60.js"></script>
+</helmet>
+
+<div style="min-height:100vh;background:#ffffff;color:#0b0c0e;font-family:'Geist',ui-sans-serif,system-ui,sans-serif;overflow-x:clip">
+
+<header style="position:sticky;top:0;z-index:50;background:rgba(255,255,255,.86);backdrop-filter:saturate(180%) blur(20px);-webkit-backdrop-filter:saturate(180%) blur(20px);border-bottom:1px solid #ececea">
+  <div class="nyes-header-inner" style="max-width:1440px;margin:0 auto;padding:0 48px;height:64px;display:flex;align-items:center;justify-content:space-between;gap:24px">
+    <a class="nyes-brand" href="#top" aria-label="NYES home" style="font-size:14px;font-weight:700;letter-spacing:.32em;color:#0b0c0e"><img src="/assets/bundle/eed3ecc90a8c2609.png" width="32" height="32" alt="" decoding="async"><span style="margin-right:-.32em">NYES</span></a>
+    <sc-if value="{{ wide }}" hint-placeholder-val="{{ true }}">
+      <nav style="display:flex;align-items:center;gap:36px;font-size:14px">
+        <a href="#tape" style="color:#3c3f45" style-hover="color:#0b0c0e">Markets</a>
+        <a href="#how" style="color:#3c3f45" style-hover="color:#0b0c0e">How it settles</a>
+        <a href="#agents" style="color:#3c3f45" style-hover="color:#0b0c0e">For agents</a>
+        <a href="/security" style="color:#3c3f45" style-hover="color:#0b0c0e">Security</a>
+        <a href="/docs" style="color:#3c3f45" style-hover="color:#0b0c0e">Docs</a>
+      </nav>
+    </sc-if>
+    <div style="display:flex;align-items:center;gap:8px">
+      <a href="#top" sc-camel-on-click="{{ openModal }}" style="display:inline-flex;align-items:center;white-space:nowrap;background:#0b0c0e;color:#ffffff;font-weight:500;border-radius:999px;height:38px;padding:0 18px;font-size:14px" style-hover="background:#33363c;color:#ffffff">Try the demo</a>
+      <details class="nyes-mobile-menu"><summary aria-label="Navigation menu"><span class="nyes-burger" aria-hidden="true"><span></span><span></span></span></summary><nav aria-label="Mobile navigation"><a href="#top">Demo</a><a href="#how">How it settles</a><a href="#tape">Example markets</a><a href="/security">Security</a><a href="/docs">Docs</a></nav></details>
+    </div>
+  </div>
+</header>
+
+<div aria-label="Simulated market ticker" style="border-bottom:1px solid #ececea;overflow:hidden;background:#ffffff;mask-image:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent)">
+  <div ref="{{ tickerRef }}" style="display:flex;width:max-content;font-family:'Geist Mono',ui-monospace,monospace;font-size:12px;white-space:nowrap">
+    <sc-for list="{{ ticker }}" as="t" hint-placeholder-count="12">
+      <div style="display:flex;align-items:center;gap:10px;padding:10px 22px;border-right:1px solid #ececea">
+        <span style="color:#0b0c0e;font-weight:600">{{ t.tk }}</span>
+        <span style="color:#74777d">&gt; {{ t.strike }}</span>
+        <sc-if value="{{ t.live }}" hint-placeholder-val="{{ true }}"><span style="color:#3f7a00;font-variant-numeric:tabular-nums">{{ t.clock }}</span><span style="color:#6b6e74">YES {{ t.share }}</span></sc-if>
+        <sc-if value="{{ t.isYes }}" hint-placeholder-val="{{ false }}"><span style="color:#3f7a00">▲ YES</span><span style="color:#6b6e74">{{ t.pool }}</span></sc-if>
+        <sc-if value="{{ t.isNo }}" hint-placeholder-val="{{ false }}"><span style="color:#c43c3c">▼ NO</span><span style="color:#6b6e74">{{ t.pool }}</span></sc-if>
+      </div>
+    </sc-for>
+  </div>
+</div>
+
+<section id="top" style="position:relative">
+  <div class="nyes-shell" style="max-width:1440px;margin:0 auto;padding:104px 48px 0;display:flex;flex-direction:column;align-items:center;text-align:center">
+    <a data-in="0" href="/docs#overview" style="display:inline-flex;align-items:center;gap:10px;padding:5px 14px 5px 5px;border:1px solid #e6e6e2;background:#f7f7f5;border-radius:999px;font-size:13.5px;color:#3c3f45" style-hover="border-color:#c9c9c4;color:#0b0c0e">
+      <span style="background:#0b0c0e;color:#d6ff3f;font-size:11px;font-weight:600;letter-spacing:.08em;border-radius:999px;padding:4px 10px;white-space:nowrap">INVITE ONLY</span>
+      <span>Public opens in October</span>
+      <span style="color:#74777d">›</span>
+    </a>
+    <h1 style="margin:32px 0 0;font-size:clamp(56px,9.2vw,132px);line-height:.9;letter-spacing:-.06em;font-weight:600;color:#0b0c0e">
+      <span style="display:block;overflow:hidden;padding-bottom:.07em"><span data-in="140" data-k="line" style="display:block">Bet the next</span></span>
+      <span style="display:block;overflow:hidden;padding-bottom:.07em"><span data-in="240" data-k="line" style="display:block">90 seconds.</span></span>
+    </h1>
+    <p data-in="420" style="margin:28px 0 0;font-size:clamp(18px,1.6vw,22px);line-height:1.45;color:#5f6268;max-width:30em;text-wrap:pretty">Pick YES or NO on a coin’s next move. Winners share the USDC pool. Create a market and earn 1% of its settled pool.</p>
+    <div data-in="580" style="margin-top:40px;display:flex;flex-wrap:wrap;justify-content:center;align-items:center;gap:16px 28px">
+      <a href="#top" sc-camel-on-click="{{ openModal }}" style="display:inline-flex;align-items:center;white-space:nowrap;background:#0b0c0e;color:#ffffff;font-weight:500;border-radius:999px;height:54px;padding:0 28px;font-size:16px" style-hover="background:#33363c;color:#ffffff">Try the demo</a>
+      <a href="#tape" style="font-size:16px;font-weight:500;color:#0b0c0e;white-space:nowrap" style-hover="color:#5f6268">Explore example markets ›</a>
+    </div>
+  </div>
+
+  <div class="nyes-shell" style="max-width:1440px;margin:0 auto;padding:88px 48px 0">
+    <div class="nyes-stage" style="position:relative;border-radius:32px;overflow:hidden;isolation:isolate;padding:72px 64px 0;background:radial-gradient(900px 480px at 50% 0%,#ffffff,rgba(255,255,255,0) 70%),linear-gradient(180deg,#f3f3f1,#e7e7e3)">
+      <div data-in="320" data-k="card" class="nyes-stage-win" style="position:relative;z-index:1;max-width:1040px;margin:0 auto;border-radius:16px 16px 0 0;background:#0a0b0d;border:1px solid #000000;border-bottom:0;box-shadow:0 60px 120px -30px rgba(0,0,0,.45),0 30px 60px -30px rgba(0,0,0,.5),inset 0 1px 0 rgba(255,255,255,.06);overflow:hidden;text-align:left;color:#edede7">
+        <div style="height:40px;padding:0 16px;display:grid;grid-template-columns:1fr auto 1fr;align-items:center;background:#111216;border-bottom:1px solid #1c1e23">
+          <div style="display:flex;gap:8px"><span style="width:11px;height:11px;border-radius:50%;background:#2c2f35"></span><span style="width:11px;height:11px;border-radius:50%;background:#2c2f35"></span><span style="width:11px;height:11px;border-radius:50%;background:#2c2f35"></span></div>
+          <span style="height:24px;padding:0 clamp(16px,6vw,72px);display:inline-flex;align-items:center;border-radius:6px;background:#0a0b0d;font-family:'Geist Mono',ui-monospace,monospace;font-size:11.5px;color:#8b8d91">nyes.fun/markets</span>
+          <span></span>
+        </div>
+        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,440px),1fr))">
+          <div style="border-right:1px solid #16181c">
+<div id="market-demo" style="position:relative;z-index:2;background:#0a0b0d;overflow:hidden;height:100%">
+          <div style="display:flex;align-items:center;justify-content:space-between;gap:12px;padding:14px 20px;border-bottom:1px solid #1a1c21;font-family:'Geist Mono',ui-monospace,monospace;font-size:12px">
+            <div style="display:flex;align-items:center;gap:14px;min-width:0">
+              <span style="display:inline-flex;align-items:center;gap:7px;color:#d6ff3f;letter-spacing:.14em"><span data-pulse="1" style="width:7px;height:7px;border-radius:50%;background:#d6ff3f"></span>{{ marketLabel }}</span>
+              <span style="color:#edede7;font-weight:600;font-size:13px">{{ m.tk }}</span>
+              <span class="nyes-market-mint" style="color:#7a7d82">{{ m.mint }}</span>
+            </div>
+            <span style="color:#7a7d82">MKT {{ id }}</span>
+          </div>
+
+          <p class="nyes-preview-note" style="color:#a3a5a9;margin:0;padding:12px 20px 0">INTERACTIVE DEMO · Simulated prices and pools. No funds used.</p>
+          <div style="padding:22px 20px 0;font-size:clamp(22px,2vw,27px);line-height:1.15;letter-spacing:-.025em;font-weight:500;color:#edede7">Above {{ m.sLabel }} in 90 seconds?</div>
+
+          <div style="display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;gap:16px 20px;padding:20px 20px 0">
+            <div>
+              <div style="font-family:'Geist Mono',monospace;font-size:11px;letter-spacing:.16em;color:#7a7d82">SETTLES IN</div>
+              <div class="nyes-clock" style="margin-top:10px;font-family:'Geist Mono',ui-monospace,monospace;font-size:clamp(84px,24vw,124px);line-height:.86;letter-spacing:-.07em;font-weight:500;font-variant-numeric:tabular-nums;color:#edede7;margin-left:-.04em">{{ mm }}<span style="opacity:{{ colonOp }}">:</span>{{ ss }}</div>
+            </div>
+            <div style="display:flex;flex-direction:column;align-items:flex-end;gap:8px;font-family:'Geist Mono',monospace">
+              <svg width="132" height="44" sc-camel-view-box="0 0 132 44" style="display:block;overflow:visible">
+                <line x1="0" x2="132" sc-camel-y1="{{ strikeY }}" sc-camel-y2="{{ strikeY }}" stroke="#4a4d54" sc-camel-stroke-dasharray="2 3" sc-camel-stroke-width="1"></line>
+                <polyline sc-camel-points="{{ sparkPts }}" fill="none" stroke="#edede7" sc-camel-stroke-opacity=".75" sc-camel-stroke-width="1.25" sc-camel-stroke-linejoin="round"></polyline>
+                <circle cx="132" sc-camel-cy="{{ lastY }}" r="2.75" fill="{{ lastColor }}"></circle>
+              </svg>
+              <div style="font-size:11.5px;color:#7a7d82;display:flex;gap:8px"><span>LAST</span><span style="color:{{ lastColor }}">{{ lastLabel }} {{ lastArrow }}</span></div>
+            </div>
+          </div>
+
+          <div style="position:relative;height:10px;margin:20px 20px 0;background:repeating-linear-gradient(90deg,#1e2126 0 calc(100% / 90 - 1.5px),transparent calc(100% / 90 - 1.5px) calc(100% / 90))">
+            <div style="position:absolute;inset:0;background:repeating-linear-gradient(90deg,#d6ff3f 0 calc(100% / 90 - 1.5px),transparent calc(100% / 90 - 1.5px) calc(100% / 90));clip-path:inset(0 {{ elapsedPct }} 0 0);transition:clip-path .6s cubic-bezier(.2,.8,.2,1)"></div>
+          </div>
+
+          <div class="nyes-sides" style="display:flex;gap:10px;padding:22px 20px 0">
+            <button disabled="{{ controlsLocked }}" aria-pressed="{{ yesSel }}" sc-camel-on-click="{{ pickYes }}" class="nyes-side" style="flex:1 1 0;min-width:0;position:relative;overflow:hidden;height:86px;display:flex;align-items:center;justify-content:space-between;padding:0 18px;background:rgba(214,255,63,.05);border:1px solid rgba(214,255,63,.32);border-radius:2px;color:#d6ff3f;cursor:pointer" style-hover="background:rgba(214,255,63,.13)">
+              <span style="position:absolute;left:0;top:0;bottom:0;width:{{ yesPct }};background:rgba(214,255,63,.08);transition:width .6s ease"></span>
+              <sc-if value="{{ yesSel }}" hint-placeholder-val="{{ true }}"><span style="position:absolute;inset:-1px;border:1px solid #d6ff3f;border-radius:2px"></span></sc-if>
+              <span style="position:relative;font-size:22px;font-weight:600;letter-spacing:.01em">YES</span>
+              <span style="position:relative;font-family:'Geist Mono',monospace;font-size:34px;font-weight:500;letter-spacing:-.05em">{{ yesPct }}</span>
+            </button>
+            <button disabled="{{ controlsLocked }}" aria-pressed="{{ noSel }}" sc-camel-on-click="{{ pickNo }}" class="nyes-side" style="flex:1 1 0;min-width:0;position:relative;overflow:hidden;height:86px;display:flex;align-items:center;justify-content:space-between;padding:0 18px;background:rgba(255,77,77,.05);border:1px solid rgba(255,77,77,.32);border-radius:2px;color:#ff4d4d;cursor:pointer" style-hover="background:rgba(255,77,77,.13)">
+              <span style="position:absolute;left:0;top:0;bottom:0;width:{{ noPct }};background:rgba(255,77,77,.08);transition:width .6s ease"></span>
+              <sc-if value="{{ noSel }}" hint-placeholder-val="{{ false }}"><span style="position:absolute;inset:-1px;border:1px solid #ff4d4d;border-radius:2px"></span></sc-if>
+              <span style="position:relative;font-size:22px;font-weight:600;letter-spacing:.01em">NO</span>
+              <span style="position:relative;font-family:'Geist Mono',monospace;font-size:34px;font-weight:500;letter-spacing:-.05em">{{ noPct }}</span>
+            </button>
+          </div>
+
+          <div style="padding:20px 20px 20px;display:grid;gap:10px">
+            <div style="display:flex;flex-wrap:wrap;justify-content:space-between;align-items:baseline;gap:8px 16px;font-family:'Geist Mono',ui-monospace,monospace">
+              <div style="display:flex;align-items:baseline;gap:10px">
+                <span style="font-size:11px;letter-spacing:.16em;color:#7a7d82">POOL</span>
+                <span ref="{{ poolRef }}" style="font-size:22px;color:#edede7;font-variant-numeric:tabular-nums;letter-spacing:-.03em">{{ poolLabel }}</span>
+                <span style="font-size:12px;color:#8b8d91">USDC</span>
+                <span ref="{{ fillRef }}" style="font-size:11.5px;opacity:0">
+                  <sc-if value="{{ fillYes }}" hint-placeholder-val="{{ false }}"><span style="color:#d6ff3f">+{{ fillAmt }} YES</span></sc-if>
+                  <sc-if value="{{ fillNo }}" hint-placeholder-val="{{ false }}"><span style="color:#ff4d4d">+{{ fillAmt }} NO</span></sc-if>
+                </span>
+              </div>
+              <span style="font-size:12px;color:#7a7d82">YES {{ yesAmt }} · NO {{ noAmt }}</span>
+            </div>
+            <div style="font-size:15px;line-height:1.4;color:#a3a5a9">Estimated return if {{ side }} wins: <span style="font-family:'Geist Mono',monospace;color:#edede7">{{ netPay }}</span>.</div><div class="nyes-preview-note" style="color:#a3a5a9">Includes stake · 1.5% fees deducted · changes until lock.<br>YES/NO percentages show pool share, not win probability.</div>
+            <div style="display:flex;flex-wrap:wrap;align-items:center;gap:8px 8px;margin-top:4px;font-family:'Geist Mono',ui-monospace,monospace">
+              <span style="font-size:11px;letter-spacing:.16em;color:#7a7d82;margin-right:4px">STAKE</span>
+              <sc-for list="{{ stakes }}" as="st" hint-placeholder-count="3">
+                <button disabled="{{ controlsLocked }}" aria-pressed="{{ st.selected }}" sc-camel-on-click="{{ st.pick }}" class="nyes-chip" style="height:36px;padding:0 10px;white-space:nowrap;background:transparent;border:1px solid {{ st.border }};color:{{ st.color }};border-radius:2px;font-family:'Geist Mono',monospace;font-size:12px;cursor:pointer">{{ st.label }}</button>
+              </sc-for>
+              <span style="margin-left:auto;font-size:12px;color:#8b8d91"><span style="color:#edede7">{{ netMultiple }}×</span> estimated return</span>
+            </div>
+          </div>
+
+          <div style="border-top:1px solid #1a1c21;padding:12px 20px;font-family:'Geist Mono',ui-monospace,monospace;font-size:11.5px;color:#7a7d82;display:flex;flex-wrap:wrap;gap:4px 10px">
+            <span>{{ windowLabel }}</span><span>·</span><span>Simulated 10s TWAP</span>
+          </div>
+
+          <sc-if value="{{ isSettled }}" hint-placeholder-val="{{ false }}">
+            <div ref="{{ stampRef }}" style="position:absolute;inset:0;z-index:5;display:grid;place-items:center;background:rgba(7,8,10,.84)">
+              <div style="display:grid;justify-items:center;gap:14px;text-align:center">
+                <span style="background:#edede7;color:#07080a;font-family:'Geist Mono',monospace;font-size:12px;font-weight:600;letter-spacing:.22em;padding:6px 12px">SETTLED</span>
+                <sc-if value="{{ resYes }}" hint-placeholder-val="{{ true }}"><span style="font-size:88px;line-height:1;font-weight:600;letter-spacing:-.05em;color:#d6ff3f">YES</span></sc-if>
+                <sc-if value="{{ resNo }}" hint-placeholder-val="{{ false }}"><span style="font-size:88px;line-height:1;font-weight:600;letter-spacing:-.05em;color:#ff4d4d">NO</span></sc-if>
+                <span style="font-family:'Geist Mono',monospace;font-size:12.5px;color:#a3a5a9">TWAP {{ printed }} vs {{ m.sLabel }} · {{ paidOut }} USDC demo return</span>
+                <span style="font-family:'Geist Mono',monospace;font-size:11px;color:#7a7d82;letter-spacing:.14em">NEXT MARKET OPENING</span>
+              </div>
+            </div>
+          </sc-if>
+        </div>
+          </div>
+          <div class="nyes-stage-side" style="padding:20px 24px 28px;display:flex;flex-direction:column;gap:20px;font-family:'Geist Mono',ui-monospace,monospace">
+            <div style="display:flex;justify-content:space-between;align-items:center;font-size:11px;letter-spacing:.14em;color:#7a7d82"><span>MARKETS</span><span style="font-size:10px;color:#a3a5a9;border:1px solid #2a2d33;border-radius:999px;padding:3px 9px">SIMULATED</span></div>
+            <div style="font-size:12.5px">
+              <div style="display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.2fr) 64px 64px;gap:12px;padding:0 0 10px;border-bottom:1px solid #16181c;font-size:10px;letter-spacing:.14em;color:#6f7277"><span>MARKET</span><span>STRIKE</span><span>CLOCK</span><span style="text-align:right">RESULT</span></div>
+              <sc-for list="{{ sideTape }}" as="sr" hint-placeholder-count="6">
+                <div style="display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.2fr) 64px 64px;gap:12px;padding:12px 0;border-bottom:1px solid #121418;white-space:nowrap">
+                  <span style="color:#edede7;font-weight:600">{{ sr.tk }}</span>
+                  <span style="color:#a3a5a9;overflow:hidden;text-overflow:ellipsis">&gt; {{ sr.strike }}</span>
+                  <span>
+                    <sc-if value="{{ sr.live }}" hint-placeholder-val="{{ false }}"><span style="color:#d6ff3f">{{ sr.clock }}</span></sc-if>
+                    <sc-if value="{{ sr.done }}" hint-placeholder-val="{{ true }}"><span style="color:#8b8d91">{{ sr.clock }}</span></sc-if>
+                  </span>
+                  <span style="text-align:right">
+                    <sc-if value="{{ sr.live }}" hint-placeholder-val="{{ false }}"><span style="color:#d6ff3f;font-size:10.5px;letter-spacing:.12em">LIVE</span></sc-if>
+                    <sc-if value="{{ sr.isYes }}" hint-placeholder-val="{{ true }}"><span style="color:#d6ff3f;font-weight:600">▲ YES</span></sc-if>
+                    <sc-if value="{{ sr.isNo }}" hint-placeholder-val="{{ false }}"><span style="color:#ff4d4d;font-weight:600">▼ NO</span></sc-if>
+                  </span>
+                </div>
+              </sc-for>
+            </div>
+            <div style="margin-top:auto;padding:14px 16px;border-radius:12px;background:#111216;border:1px solid #1c1e23;display:grid;gap:8px">
+              <div style="display:flex;justify-content:space-between;align-items:center;gap:12px"><span style="display:flex;align-items:center;gap:10px"><span style="background:#edede7;color:#07080a;font-size:10px;font-weight:600;letter-spacing:.16em;padding:3px 7px;border-radius:4px">SETTLED</span><span style="font-size:12.5px;color:#edede7;font-weight:600">{{ prev.tk }}</span><span style="font-size:12px;color:#7a7d82">MKT {{ prev.id }}</span></span>
+                <sc-if value="{{ prev.isYes }}" hint-placeholder-val="{{ true }}"><span style="font-size:12.5px;font-weight:600;color:#d6ff3f">▲ YES</span></sc-if>
+                <sc-if value="{{ prev.isNo }}" hint-placeholder-val="{{ false }}"><span style="font-size:12.5px;font-weight:600;color:#ff4d4d">▼ NO</span></sc-if>
+              </div>
+              <div style="display:flex;justify-content:space-between;gap:12px;font-size:11.5px;color:#8b8d91"><span>Above {{ prev.strike }} · printed {{ prev.printed }}</span><span>{{ prev.pool }} USDC</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div aria-hidden="true" class="nyes-stage-phone" style="position:absolute;z-index:2;right:56px;top:150px;width:300px;height:620px;padding:4px;border-radius:56px;background:linear-gradient(160deg,#55565b,#1c1d20 30%,#2e2f33 70%,#141416);box-shadow:0 60px 100px -30px rgba(0,0,0,.55),0 20px 40px -20px rgba(0,0,0,.5);text-align:left;color:#edede7">
+        <div style="height:100%;padding:10px;border-radius:52px;background:#000000">
+          <div style="position:relative;height:100%;border-radius:43px;background:#08090b;overflow:hidden;display:flex;flex-direction:column">
+            <div style="position:absolute;left:50%;top:10px;width:92px;height:26px;margin-left:-46px;border-radius:999px;background:#000000"></div>
+            <div style="height:46px;flex:none;padding:0 26px;display:flex;align-items:center;justify-content:space-between;font-size:14px;font-weight:600"><span>10:24</span><span style="width:22px;height:11px;border:1px solid rgba(237,237,231,.55);border-radius:3px;padding:1px"><span style="display:block;width:70%;height:100%;background:#edede7;border-radius:1px"></span></span></div>
+            <div style="height:42px;flex:none;padding:0 18px;display:flex;align-items:center;justify-content:space-between">
+              <span style="display:flex;align-items:center;gap:8px;font-size:12px;font-weight:700;letter-spacing:.3em"><img src="/assets/bundle/eed3ecc90a8c2609.png" width="24" height="24" alt="" style="display:block;border-radius:50%">NYES</span>
+              <span style="font-family:'Geist Mono',ui-monospace,monospace;font-size:9.5px;letter-spacing:.14em;color:#a3a5a9;border:1px solid #2a2d33;border-radius:999px;padding:3px 8px">SIMULATED</span>
+            </div>
+            <div style="margin:6px 12px 0;padding:16px;border-radius:20px;background:#0f1013;border:1px solid #1c1e23;display:flex;flex-direction:column">
+              <div style="display:flex;justify-content:space-between;font-family:'Geist Mono',ui-monospace,monospace;font-size:10.5px;color:#7a7d82"><span style="display:inline-flex;align-items:center;gap:6px;color:#d6ff3f;letter-spacing:.14em"><span style="width:6px;height:6px;border-radius:50%;background:#d6ff3f"></span>{{ marketLabel }} · {{ m.tk }}</span><span>MKT {{ id }}</span></div>
+              <div style="margin-top:12px;font-size:18px;line-height:1.2;letter-spacing:-.02em;font-weight:500">Above {{ m.sLabel }} in 90 seconds?</div>
+              <div style="margin-top:16px;font-family:'Geist Mono',ui-monospace,monospace;font-size:10px;letter-spacing:.16em;color:#7a7d82">SETTLES IN</div>
+              <div style="margin-top:6px;font-family:'Geist Mono',ui-monospace,monospace;font-size:58px;line-height:.9;letter-spacing:-.07em;font-weight:500;font-variant-numeric:tabular-nums">{{ mm }}:{{ ss }}</div>
+              <div style="position:relative;height:6px;margin-top:14px;background:repeating-linear-gradient(90deg,rgba(255,255,255,.14) 0 2px,transparent 2px 4px)"><div style="position:absolute;inset:0;background:repeating-linear-gradient(90deg,#d6ff3f 0 2px,transparent 2px 4px);clip-path:inset(0 {{ elapsedPct }} 0 0);transition:clip-path .6s ease"></div></div>
+              <div style="margin-top:14px;display:flex;flex-direction:column;gap:8px">
+                <div style="height:46px;display:flex;align-items:center;justify-content:space-between;padding:0 14px;background:rgba(214,255,63,.06);border:1px solid rgba(214,255,63,.38);border-radius:14px;color:#d6ff3f"><span style="font-size:15px;font-weight:600">YES</span><span style="font-family:'Geist Mono',ui-monospace,monospace;font-size:20px;letter-spacing:-.05em">{{ yesPct }}</span></div>
+                <div style="height:46px;display:flex;align-items:center;justify-content:space-between;padding:0 14px;background:rgba(255,77,77,.06);border:1px solid rgba(255,77,77,.38);border-radius:14px;color:#ff5a5a"><span style="font-size:15px;font-weight:600">NO</span><span style="font-family:'Geist Mono',ui-monospace,monospace;font-size:20px;letter-spacing:-.05em">{{ noPct }}</span></div>
+              </div>
+              <div style="margin-top:12px;display:flex;justify-content:space-between;font-family:'Geist Mono',ui-monospace,monospace;font-size:10.5px;color:#7a7d82"><span>Pool <span style="color:#edede7">{{ poolLabel }} USDC</span></span><span>Opener <span style="color:#edede7">1%</span></span></div>
+            </div>
+            <div style="margin:10px 12px 0;display:flex;flex-direction:column;gap:6px">
+              <sc-for list="{{ phoneTape }}" as="pm" hint-placeholder-count="2">
+                <div style="height:42px;padding:0 14px;border-radius:14px;background:#0f1013;border:1px solid #1c1e23;display:flex;align-items:center;justify-content:space-between;font-family:'Geist Mono',ui-monospace,monospace;font-size:11.5px"><span style="display:flex;gap:10px"><span style="color:#edede7;font-weight:600">{{ pm.tk }}</span><span style="color:#8b8d91">&gt; {{ pm.strike }}</span></span>
+                  <sc-if value="{{ pm.isYes }}" hint-placeholder-val="{{ true }}"><span style="color:#d6ff3f">▲ YES</span></sc-if>
+                  <sc-if value="{{ pm.isNo }}" hint-placeholder-val="{{ false }}"><span style="color:#ff5a5a">▼ NO</span></sc-if>
+                </div>
+              </sc-for>
+            </div>
+            <div style="position:absolute;left:50%;bottom:8px;width:110px;height:4px;margin-left:-55px;border-radius:999px;background:rgba(237,237,231,.55)"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section aria-label="Key numbers">
+  <div class="nyes-shell" style="max-width:1440px;margin:0 auto;padding:0 48px">
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,240px),1fr));border-bottom:1px solid #ececea">
+      <div data-rv="0" style="padding:56px 32px 52px 0;display:flex;flex-direction:column;gap:12px"><span style="font-size:clamp(44px,4.4vw,64px);font-weight:600;letter-spacing:-.05em;line-height:1">90 s</span><span style="font-size:16px;color:#5f6268">From open to settlement</span></div>
+      <div data-rv="60" style="padding:56px 32px 52px 0;display:flex;flex-direction:column;gap:12px"><span style="font-size:clamp(44px,4.4vw,64px);font-weight:600;letter-spacing:-.05em;line-height:1">1%</span><span style="font-size:16px;color:#5f6268">To the market opener</span></div>
+      <div data-rv="120" style="padding:56px 32px 52px 0;display:flex;flex-direction:column;gap:12px"><span style="font-size:clamp(44px,4.4vw,64px);font-weight:600;letter-spacing:-.05em;line-height:1">0.5%</span><span style="font-size:16px;color:#5f6268">Protocol fee</span></div>
+      <div data-rv="180" style="padding:56px 32px 52px 0;display:flex;flex-direction:column;gap:12px"><span style="font-size:clamp(44px,4.4vw,64px);font-weight:600;letter-spacing:-.05em;line-height:1">10 s</span><span style="font-size:16px;color:#5f6268">TWAP window at settlement</span></div>
+    </div>
+  </div>
+</section>
+
+<section id="how" style="scroll-margin-top:64px;background:#f5f5f3">
+  <div class="nyes-shell" style="max-width:1440px;margin:0 auto;padding:128px 40px">
+    <div data-rv="0">
+      <div style="font-size:16px;font-weight:500;color:#5f6268">How it settles</div>
+      <h2 style="margin:22px 0 0;font-size:clamp(40px,4.8vw,76px);line-height:.95;letter-spacing:-.05em;font-weight:600;max-width:11em;text-wrap:balance">One transaction in. One price out.</h2>
+    </div>
+    <div style="margin-top:72px;display:grid;grid-template-columns:repeat({{ howCols }},minmax(0,1fr));gap:20px">
+
+      <div data-rv="0" style="background:#ffffff;border-radius:28px;padding:32px;display:flex;flex-direction:column">
+        <div style="display:flex;align-items:center;gap:14px;font-family:'Geist Mono',monospace;font-size:13px;color:#0b0c0e"><span>01</span><span style="flex:1;height:1px;background:#e3e3df"></span></div>
+        <h3 style="margin:44px 0 0;font-size:30px;line-height:1.05;letter-spacing:-.035em;font-weight:600">Paste a CA.</h3>
+        <p style="margin:12px 0 0;font-size:17px;line-height:1.5;color:#5f6268;max-width:22em">NYES checks liquidity. Thin coins are rejected.</p>
+        <div style="margin-top:40px;border:1px solid #e3e3df;border-radius:12px;font-family:'Geist Mono',ui-monospace,monospace;font-size:12.5px">
+          <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;padding:12px 14px;border-bottom:1px solid #e8e8e4">
+            <span style="display:flex;align-items:center;gap:4px;color:#0b0c0e;min-height:16px">{{ how.typed }}<span data-pulse="1" style="width:7px;height:14px;background:#9ccc00"></span></span>
+            <span style="color:#74777d">mint</span>
+          </div>
+          <div style="display:grid;grid-template-columns:1fr auto auto;gap:10px 18px;padding:12px 14px">
+            <span style="color:#0b0c0e">$WIRE</span><span style="color:#6b6e74">liq $1.84M</span><span style="color:{{ how.okColor }};transition:color .3s">{{ how.okLabel }}</span>
+            <span style="color:#0b0c0e">$FUZZ</span><span style="color:#6b6e74">liq $38K</span><span style="color:{{ how.badColor }};transition:color .3s">{{ how.badLabel }}</span>
+          </div>
+        </div>
+      </div>
+
+      <div data-rv="120" style="background:#ffffff;border-radius:28px;padding:32px;display:flex;flex-direction:column">
+        <div style="display:flex;align-items:center;gap:14px;font-family:'Geist Mono',monospace;font-size:13px;color:#0b0c0e"><span>02</span><span style="flex:1;height:1px;background:#e3e3df"></span></div>
+        <h3 style="margin:44px 0 0;font-size:30px;line-height:1.05;letter-spacing:-.035em;font-weight:600">Set the strike and the clock.</h3>
+        <p style="margin:12px 0 0;font-size:17px;line-height:1.5;color:#5f6268;max-width:22em">90 seconds, 5 minutes, or 15. One transaction opens the pool.</p>
+        <div style="margin-top:auto;padding-top:40px">
+          <div style="border:1px solid #e3e3df;border-radius:12px;font-family:'Geist Mono',ui-monospace,monospace;font-size:12.5px">
+            <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;padding:12px 14px;border-bottom:1px solid #e8e8e4">
+              <span style="color:#74777d">strike</span><span style="color:#0b0c0e">above $0.00042 · {{ how.clockLong }}</span>
+            </div>
+            <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;padding:10px 14px">
+              <span style="color:#74777d">clock</span>
+              <div style="display:flex;gap:6px">
+                <sc-for list="{{ how.clocks }}" as="c" hint-placeholder-count="3"><span style="padding:5px 10px;border:1px solid {{ c.b }};color:{{ c.c }};transition:border-color .3s,color .3s">{{ c.l }}</span></sc-for>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div data-rv="240" style="background:#ffffff;border-radius:28px;padding:32px;display:flex;flex-direction:column">
+        <div style="display:flex;align-items:center;gap:14px;font-family:'Geist Mono',monospace;font-size:13px;color:#0b0c0e"><span>03</span><span style="flex:1;height:1px;background:#e3e3df"></span></div>
+        <h3 style="margin:44px 0 0;font-size:30px;line-height:1.05;letter-spacing:-.035em;font-weight:600">Price prints.</h3>
+        <p style="margin:12px 0 0;font-size:17px;line-height:1.5;color:#5f6268;max-width:22em">Winners are paid in USDC. The market closes. The record stays.</p>
+        <div style="margin-top:auto;padding-top:40px">
+          <div style="border:1px solid #e3e3df;border-radius:12px;font-family:'Geist Mono',ui-monospace,monospace;font-size:12.5px;display:grid;grid-template-columns:auto 1fr;gap:9px 18px;padding:12px 14px">
+            <sc-for list="{{ how.receipt }}" as="rc" hint-placeholder-count="6"><span style="color:#74777d;opacity:{{ rc.o }};transition:opacity .35s">{{ rc.k }}</span><span style="color:{{ rc.c }};text-align:right;opacity:{{ rc.o }};transition:opacity .35s">{{ rc.v }}</span></sc-for>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="watch" aria-label="Demo" style="scroll-margin-top:64px">
+  <div class="nyes-shell" style="max-width:1440px;margin:0 auto;padding:112px 40px;display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,400px),1fr));gap:48px 80px;align-items:center">
+    <div data-rv="0">
+      <div style="font-size:16px;font-weight:500;color:#5f6268">Watch one settle</div>
+      <h2 style="margin:22px 0 0;font-size:clamp(36px,4vw,64px);line-height:.95;letter-spacing:-.05em;font-weight:600;max-width:10em;text-wrap:balance">Open to settled in 30 seconds.</h2>
+      <p style="margin:22px 0 0;font-size:18px;line-height:1.5;color:#5f6268;max-width:26em;text-wrap:pretty">Pasted, priced, filled and paid. A simulated market, shown at 15× speed. Click the video to pause.</p>
+    </div>
+    <div data-rv="120" style="width:100%;max-width:560px;justify-self:center;border-radius:24px;overflow:hidden;background:#000000;box-shadow:0 40px 80px -40px rgba(0,0,0,.35)">
+      <x-import component-from-global-scope="NyesDemoLoop" from="/assets/bundle/ce1b710deb901308.js#/nyes-demo-core.js" hint-size="100%,560px"></x-import>
+    </div>
+  </div>
+</section>
+
+<section id="why" style="scroll-margin-top:64px">
+  <div class="nyes-shell" style="max-width:1440px;margin:0 auto;padding:140px 40px;display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,460px),1fr));gap:56px 80px;align-items:start">
+    <div data-rv="0">
+      <div style="font-size:16px;font-weight:500;color:#5f6268">Why this only works here</div>
+      <h2 style="margin:22px 0 0;font-size:clamp(44px,5.8vw,96px);line-height:.92;letter-spacing:-.055em;font-weight:600;max-width:9em;text-wrap:balance">Slow chains can’t price two minutes.</h2>
+    </div>
+    <div style="border-top:1px solid #e3e3df">
+      <div data-rv="80" style="display:grid;grid-template-columns:44px 1fr;gap:16px;padding:30px 0;border-bottom:1px solid #e3e3df">
+        <span style="font-family:'Geist Mono',monospace;font-size:12px;color:#74777d;padding-top:10px">A</span>
+        <p style="margin:0;font-size:clamp(24px,2.4vw,36px);line-height:1.15;letter-spacing:-.03em;color:#6b6e74;text-wrap:pretty">Polymarket is built for days and politics.</p>
+      </div>
+      <div data-rv="160" style="display:grid;grid-template-columns:44px 1fr;gap:16px;padding:30px 0;border-bottom:1px solid #e3e3df">
+        <span style="font-family:'Geist Mono',monospace;font-size:12px;color:#74777d;padding-top:10px">B</span>
+        <p style="margin:0;font-size:clamp(24px,2.4vw,36px);line-height:1.15;letter-spacing:-.03em;color:#6b6e74;text-wrap:pretty">Hyperliquid binaries are built for a venue, not a reply.</p>
+      </div>
+      <div data-rv="240" style="display:grid;grid-template-columns:44px 1fr;gap:16px;padding:30px 0;border-bottom:1px solid #e3e3df">
+        <span style="font-family:'Geist Mono',monospace;font-size:12px;color:#3f7a00;padding-top:10px">C</span>
+        <p style="margin:0;font-size:clamp(24px,2.4vw,36px);line-height:1.15;letter-spacing:-.03em;color:#0b0c0e;text-wrap:pretty">Solana is cheap and fast enough that a 90-second market is worth opening.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="tape" style="scroll-margin-top:64px">
+  <div class="nyes-shell" style="max-width:1440px;margin:0 auto;padding:128px 40px">
+    <div data-rv="0" style="display:flex;flex-wrap:wrap;justify-content:space-between;align-items:flex-end;gap:24px">
+      <div>
+        <div style="font-size:16px;font-weight:500;color:#5f6268">Settled tape</div>
+        <h2 style="margin:22px 0 0;font-size:clamp(40px,4.8vw,76px);line-height:.95;letter-spacing:-.05em;font-weight:600">Read the tape.</h2>
+      </div>
+      <div style="display:flex;align-items:center;gap:8px;font-family:'Geist Mono',monospace;font-size:12px;color:#6b6e74"><span data-pulse="1" style="width:6px;height:6px;border-radius:50%;background:#9ccc00"></span>6 example markets · simulated data · select a row for the breakdown</div>
+    </div>
+    <div data-rv="100" class="nyes-tape-scroll" style="margin-top:56px;overflow-x:auto">
+      <div class="nyes-tape" style="min-width:780px;font-family:'Geist Mono',ui-monospace,monospace;border-top:1px solid #e3e3df">
+        <div class="nyes-tape-head" style="display:grid;grid-template-columns:minmax(0,2.3fr) minmax(0,.7fr) minmax(0,1.3fr) minmax(0,1fr);gap:24px;padding:14px 16px;border-bottom:1px solid #e3e3df;font-size:11px;letter-spacing:.16em;color:#74777d">
+          <span>MARKET</span><span>CLOCK</span><span>POOL</span><span style="text-align:right">RESULT</span>
+        </div>
+        <sc-for list="{{ tape }}" as="row" hint-placeholder-count="6">
+          <div style="border-bottom:1px solid #ececea">
+          <div role="button" sc-camel-tab-index="0" aria-expanded="{{ row.open }}" aria-label="{{ row.accessibleLabel }}" data-row="{{ row.id }}" sc-camel-on-key-down="{{ row.onKey }}" sc-camel-on-click="{{ row.toggle }}" class="nyes-tape-row" style="display:grid;grid-template-columns:minmax(0,2.3fr) minmax(0,.7fr) minmax(0,1.3fr) minmax(0,1fr);gap:24px;align-items:center;padding:18px 16px;font-size:14px;cursor:pointer" style-hover="background:#f5f5f3">
+            <div class="nyes-tape-mkt" style="display:flex;align-items:baseline;gap:14px;min-width:0;white-space:nowrap;overflow:hidden">
+              <span style="color:#0b0c0e;font-weight:600;min-width:62px">{{ row.tk }}</span>
+              <span style="color:#5f6268">Above {{ row.strike }}</span>
+              <span class="nyes-tape-mint" style="color:#74777d;font-size:12px">{{ row.mint }}</span>
+            </div>
+            <div class="nyes-tape-clock">
+              <sc-if value="{{ row.live }}" hint-placeholder-val="{{ false }}"><span style="color:#3f7a00;font-variant-numeric:tabular-nums">{{ row.clock }}</span></sc-if>
+              <sc-if value="{{ row.done }}" hint-placeholder-val="{{ true }}"><span style="color:#6b6e74">{{ row.clock }}</span></sc-if>
+            </div>
+            <div class="nyes-tape-pool" style="display:flex;align-items:center;gap:14px">
+              <span style="color:#0b0c0e;font-variant-numeric:tabular-nums;min-width:108px">{{ row.pool }} <span style="color:#74777d;font-size:12px">USDC</span></span>
+              <span style="flex:1;max-width:120px;height:3px;display:flex;gap:2px">
+                <span style="width:{{ row.yesW }};background:#9ccc00;transition:width .6s ease"></span>
+                <span style="flex:1;background:#e5484d"></span>
+              </span>
+            </div>
+            <div class="nyes-tape-res" style="display:flex;justify-content:flex-end;align-items:baseline;gap:12px">
+              <sc-if value="{{ row.live }}" hint-placeholder-val="{{ false }}"><span style="display:inline-flex;align-items:center;gap:7px;color:#3f7a00;letter-spacing:.1em;font-size:12.5px"><span data-pulse="1" style="width:6px;height:6px;border-radius:50%;background:#9ccc00"></span>{{ marketLabel }}</span><span style="color:#6b6e74;font-size:12.5px">YES {{ row.share }}</span></sc-if>
+              <sc-if value="{{ row.isYes }}" hint-placeholder-val="{{ true }}"><span style="color:#6b6e74;font-size:12.5px">{{ row.printed }}</span><span style="color:#3f7a00;font-weight:600;min-width:52px;text-align:right">▲ YES</span></sc-if>
+              <sc-if value="{{ row.isNo }}" hint-placeholder-val="{{ false }}"><span style="color:#6b6e74;font-size:12.5px">{{ row.printed }}</span><span style="color:#c43c3c;font-weight:600;min-width:52px;text-align:right">▼ NO</span></sc-if>
+              <span style="color:#9a9ca1;font-size:13px;width:14px;text-align:right">{{ row.sign }}</span>
+            </div>
+          </div>
+          <sc-if value="{{ row.open }}" hint-placeholder-val="{{ false }}">
+            <div style="margin:0 16px 18px;border:1px solid #e3e3df;background:#f5f5f3;display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,130px),1fr));gap:1px">
+              <sc-for list="{{ row.receipt }}" as="rc" hint-placeholder-count="6">
+                <div style="padding:12px 14px;display:grid;gap:6px">
+                  <span style="font-size:10.5px;letter-spacing:.16em;color:#74777d">{{ rc.k }}</span>
+                  <span style="font-size:14px;color:{{ rc.c }}">{{ rc.v }}</span>
+                </div>
+              </sc-for>
+            </div>
+          </sc-if>
+          </div>
+        </sc-for>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="security" style="scroll-margin-top:64px;background:#0b0c0e;color:#f4f4ef">
+  <div class="nyes-shell" style="max-width:1440px;margin:0 auto;padding:144px 48px 128px">
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,460px),1fr));gap:32px 80px;align-items:end">
+      <div data-rv="0"><div style="font-size:16px;font-weight:500;color:#a3a5a9">Security</div><h2 style="margin:16px 0 0;font-size:clamp(44px,6vw,88px);line-height:.94;letter-spacing:-.055em;font-weight:600;color:#f4f4ef;text-wrap:balance">Nothing to trust but the price.</h2></div>
+      <p data-rv="80" style="margin:0;font-size:20px;line-height:1.5;color:#a3a5a9;max-width:26em">NYES holds no funds between markets, runs no order book and has no admin who can pick a result.</p>
+    </div>
+    <div style="margin-top:80px;display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,300px),1fr));gap:16px">
+      <div data-rv="0" style="padding:36px;border-radius:24px;background:#141519;border:1px solid #1f2126;display:flex;flex-direction:column;gap:12px"><span style="font-family:'Geist Mono',ui-monospace,monospace;font-size:13px;color:#d6ff3f">01</span><h3 style="margin:20px 0 0;font-size:28px;letter-spacing:-.03em;font-weight:600;color:#f4f4ef">Non-custodial.</h3><p style="margin:0;font-size:17px;line-height:1.55;color:#a3a5a9">Stakes sit in a per-market program account. They leave only as payouts, fees or refunds.</p></div>
+      <div data-rv="80" style="padding:36px;border-radius:24px;background:#141519;border:1px solid #1f2126;display:flex;flex-direction:column;gap:12px"><span style="font-family:'Geist Mono',ui-monospace,monospace;font-size:13px;color:#d6ff3f">02</span><h3 style="margin:20px 0 0;font-size:28px;letter-spacing:-.03em;font-weight:600;color:#f4f4ef">No resolver.</h3><p style="margin:0;font-size:17px;line-height:1.55;color:#a3a5a9">Results come from the Pyth TWAP. No key can override a settled market.</p></div>
+      <div data-rv="160" style="padding:36px;border-radius:24px;background:#141519;border:1px solid #1f2126;display:flex;flex-direction:column;gap:12px"><span style="font-family:'Geist Mono',ui-monospace,monospace;font-size:13px;color:#d6ff3f">03</span><h3 style="margin:20px 0 0;font-size:28px;letter-spacing:-.03em;font-weight:600;color:#f4f4ef">Fail to refund.</h3><p style="margin:0;font-size:17px;line-height:1.55;color:#a3a5a9">A stale or uncertain oracle voids the market and returns every stake with no fee.</p></div>
+    </div>
+    <div style="margin-top:40px;padding-top:28px;border-top:1px solid #1f2126;display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:16px 32px;font-size:15px">
+      <div style="display:flex;flex-wrap:wrap;gap:12px 40px;color:#a3a5a9"><span>Source <span style="color:#f4f4ef">Pyth price feed</span></span><span>Settlement <span style="color:#f4f4ef">TWAP over the final 10 seconds</span></span><span>Pool cap <span style="color:#f4f4ef">2% of onchain liquidity</span></span></div>
+      <a href="/security" style="color:#d6ff3f;font-weight:500;white-space:nowrap" style-hover="color:#f4f4ef">Read the security model ›</a>
+    </div>
+  </div>
+</section>
+
+<section id="agents" style="scroll-margin-top:64px">
+  <div class="nyes-shell" style="max-width:1440px;margin:0 auto;padding:88px 40px;display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,440px),1fr));gap:48px 80px;align-items:center">
+    <div data-rv="0">
+      <div style="font-size:16px;font-weight:500;color:#5f6268">For agents</div>
+      <h2 style="margin:22px 0 0;font-size:clamp(34px,3.6vw,56px);line-height:1;letter-spacing:-.045em;font-weight:600;max-width:12em;text-wrap:balance">Humans get a terminal. Agents get an API.</h2>
+      <p style="margin:22px 0 0;font-size:18px;line-height:1.5;color:#5f6268;max-width:28em;text-wrap:pretty">Agents can open a market when a mint crosses a threshold and read settled PnL per wallet.</p>
+    </div>
+    <div data-rv="120" style="border-radius:20px;background:#0b0c0e;overflow:hidden;box-shadow:0 40px 80px -40px rgba(0,0,0,.35);color:#edede7;font-family:'Geist Mono',ui-monospace,monospace">
+      <div style="display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:8px 12px;padding:12px 16px;border-bottom:1px solid #1a1c21;font-size:11.5px;color:#7a7d82">
+        <span>agent.http</span>
+        <a href="/api" style="border:1px solid #3a3d44;color:#edede7;padding:6px 9px;letter-spacing:.16em;font-size:10.5px;white-space:nowrap" style-hover="border-color:#edede7">PREVIEW · API REFERENCE →</a>
+      </div>
+      <div class="nyes-code" style="padding:18px 16px;font-size:13.5px;line-height:2;overflow-x:auto;white-space:pre">
+        <div><span style="color:#5d6066;display:inline-block;width:28px">1</span><span style="color:#edede7">POST</span> <span style="color:#a3a5a9">/v1/markets</span></div>
+        <div><span style="color:#5d6066;display:inline-block;width:28px">2</span><span style="color:#8b8d91">  mint=</span><span style="color:#edede7">7xK3…pQ9</span><span style="color:#8b8d91">  strike=</span><span style="color:#edede7">0.00042</span><span style="color:#8b8d91">  clock=</span><span style="color:#edede7">90s</span></div>
+        <div><span style="color:#5d6066;display:inline-block;width:28px">3</span><span style="color:#8b8d91">  when=</span><span style="color:#edede7">liquidity_usd &gt; 250000</span></div>
+        <div><span style="color:#5d6066;display:inline-block;width:28px">4</span><span style="color:#edede7">GET </span> <span style="color:#a3a5a9">/v1/wallets/9aF…2kQ/pnl?status=settled</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section style="padding:0 48px" class="nyes-shell">
+  <div style="position:relative;max-width:1344px;margin:0 auto;min-height:620px;border-radius:32px;overflow:hidden;isolation:isolate;background:#f1f1ee;display:flex;align-items:center">
+    <div style="position:absolute;inset:0;z-index:0"><image-slot id="nyes-2a-close" shape="rect" src="/assets/bundle/6d93d994bb303dd8.jpg" credit="Photo by Sebastian Schuster on Unsplash" credit-href="https://unsplash.com/@sebby88" placeholder="Closing photo: architecture, office or team"></image-slot></div>
+    <div aria-hidden="true" style="position:absolute;inset:0;z-index:1;pointer-events:none;background:linear-gradient(90deg,rgba(255,255,255,.97) 0,rgba(255,255,255,.94) min(780px,72%),rgba(255,255,255,.3) min(1040px,92%),rgba(255,255,255,0) 100%)"></div>
+    <div style="position:relative;z-index:2;max-width:min(860px,72%);padding:80px clamp(28px,6vw,80px);display:flex;flex-direction:column;align-items:flex-start">
+      <div data-rv="0" style="display:flex;align-items:center;gap:10px;font-family:'Geist Mono',ui-monospace,monospace;font-size:12.5px;letter-spacing:.12em;color:#3c3f45"><span data-pulse="1" style="width:6px;height:6px;border-radius:50%;background:#0b0c0e"></span>{{ m.tk }} above {{ m.sLabel }} · {{ mm }}:{{ ss }} · pool {{ poolLabel }} USDC</div>
+      <h2 data-rv="80" style="margin:24px 0 0;font-size:clamp(44px,6vw,84px);line-height:.94;letter-spacing:-.055em;font-weight:600;color:#0b0c0e;text-wrap:balance">Someone is already wrong about the next 90 seconds.</h2>
+      <div data-rv="160" style="margin-top:40px;display:flex;flex-wrap:wrap;align-items:center;gap:16px 28px">
+        <a href="#top" sc-camel-on-click="{{ openModal }}" style="display:inline-flex;align-items:center;white-space:nowrap;background:#0b0c0e;color:#ffffff;font-weight:500;border-radius:999px;height:54px;padding:0 28px;font-size:16px" style-hover="background:#33363c;color:#ffffff">Try the demo</a>
+        <a href="#top" style="font-size:16px;font-weight:500;color:#0b0c0e;white-space:nowrap" style-hover="color:#5f6268">Take the other side ›</a>
+      </div>
+      <p data-rv="220" style="margin:28px 0 0;font-size:15px;color:#5f6268"><span style="color:#0b0c0e;font-weight:500">Invite only for now.</span> Public opens in October at nyes.fun.</p>
+    </div>
+  </div>
+</section>
+
+<footer style="margin-top:120px;background:#f5f5f3">
+  <div class="nyes-shell" style="max-width:1440px;margin:0 auto;padding:72px 48px 36px">
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,180px),1fr));gap:48px">
+      <div style="display:flex;flex-direction:column;gap:14px;grid-column:span 1;min-width:240px">
+        <a class="nyes-brand" href="#top" aria-label="NYES home" style="font-size:14px;font-weight:700;letter-spacing:.32em;color:#0b0c0e"><img src="/assets/bundle/eed3ecc90a8c2609.png" width="36" height="36" alt="" loading="lazy"><span>NYES</span></a>
+        <span style="font-size:16px;color:#3c3f45">90-second markets on Solana.</span>
+        <span style="font-size:14px;color:#6b6e74">nyes.fun · invite only · public in October</span>
+        <a href="https://x.com/NYESmarket" target="_blank" rel="noopener noreferrer" aria-label="NYES on X (@NYESmarket)" style="margin-top:6px;align-self:flex-start;display:inline-flex;align-items:center;gap:10px;height:40px;padding:0 16px 0 12px;border:1px solid #d4d4cf;border-radius:999px;background:#ffffff;color:#0b0c0e;font-size:14px;font-weight:500;white-space:nowrap" style-hover="border-color:#0b0c0e;color:#0b0c0e"><svg width="14" height="14" sc-camel-view-box="0 0 24 24" aria-hidden="true" style="display:block"><path fill="currentColor" d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"></path></svg><span>@NYESmarket</span></a>
+      </div>
+      <nav class="nyes-foot-nav" aria-label="Product" style="display:flex;flex-direction:column;gap:6px;font-size:14px"><span style="font-weight:600;color:#0b0c0e;margin-bottom:6px">Product</span><a href="#tape" style="color:#5f6268" style-hover="color:#0b0c0e">Markets</a><a href="#how" style="color:#5f6268" style-hover="color:#0b0c0e">How it settles</a><a href="#agents" style="color:#5f6268" style-hover="color:#0b0c0e">For agents</a></nav>
+      <nav class="nyes-foot-nav" aria-label="Developers" style="display:flex;flex-direction:column;gap:6px;font-size:14px"><span style="font-weight:600;color:#0b0c0e;margin-bottom:6px">Developers</span><a href="/docs" style="color:#5f6268" style-hover="color:#0b0c0e">Docs</a><a href="/api" style="color:#5f6268" style-hover="color:#0b0c0e">API</a><a href="/status" style="color:#5f6268" style-hover="color:#0b0c0e">Status</a></nav>
+      <nav class="nyes-foot-nav" aria-label="Company" style="display:flex;flex-direction:column;gap:6px;font-size:14px"><span style="font-weight:600;color:#0b0c0e;margin-bottom:6px">Company</span><a href="https://x.com/NYESmarket" target="_blank" rel="noopener noreferrer" style="color:#5f6268" style-hover="color:#0b0c0e">X / Twitter</a><a href="/docs#overview" style="color:#5f6268" style-hover="color:#0b0c0e">Launch info</a><a href="/security" style="color:#5f6268" style-hover="color:#0b0c0e">Security</a><a href="/legal" style="color:#5f6268" style-hover="color:#0b0c0e">Legal</a></nav>
+    </div>
+    <p style="margin:56px 0 0;padding-top:24px;border-top:1px solid #e3e3df;font-size:13px;line-height:1.6;color:#5f6268;max-width:62em">Not available where binary pools are regulated as gambling. NYES is settlement infrastructure. You are not betting against the house.</p>
+    <div style="margin-top:20px;display:flex;flex-wrap:wrap;gap:8px 24px;justify-content:space-between;font-size:13px;color:#6b6e74"><span>© 2026 NYES</span><span>Simulated demo. No funds used.</span></div>
+  </div>
+</footer>
+
+<sc-if value="{{ modalOpen }}" hint-placeholder-val="{{ false }}">
+  <div ref="{{ modalRef }}" sc-camel-on-click="{{ closeModal }}" style="position:fixed;inset:0;z-index:100;background:rgba(11,12,14,.42);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);display:grid;grid-template-columns:minmax(0,540px);justify-content:center;align-content:center;padding:clamp(12px,4vw,24px);overflow-y:auto">
+    <div class="nyes-dialog" role="dialog" aria-modal="true" aria-labelledby="market-preview-title" sc-camel-tab-index="-1" sc-camel-on-click="{{ stop }}" style="width:100%;max-width:540px;background:#ffffff;border:1px solid #e3e3df;border-radius:20px;box-shadow:0 40px 100px -30px rgba(0,0,0,.35);overflow:hidden">
+      <div style="display:flex;align-items:center;justify-content:space-between;padding:14px 20px;border-bottom:1px solid #e8e8e4;font-family:'Geist Mono',monospace;font-size:12px;letter-spacing:.14em">
+        <span id="market-preview-title" style="color:#0b0c0e">PREVIEW A MARKET</span>
+        <div style="display:flex;align-items:center;gap:16px"><span style="color:#74777d">STEP {{ stepNum }}/3</span><button aria-label="Close market preview" sc-camel-on-click="{{ closeModal }}" style="background:none;border:0;color:#5f6268;font-size:18px;line-height:1;cursor:pointer;padding:4px" style-hover="color:#0b0c0e">×</button></div>
+      </div>
+      <div style="padding:24px 20px 22px;display:grid;gap:18px">
+        <div style="padding:12px 14px;border:1px solid #d4d4cf;font-size:14px;line-height:1.5;color:#5f6268"><span style="color:#0b0c0e">Live check.</span> Paste any Solana token. NYES reads its real DEX pools and applies the listing rules. The market setup is a preview: no wallet, invite code or transaction is used.</div>
+        <div style="display:grid;gap:8px">
+          <label for="market-mint" style="font-family:'Geist Mono',monospace;font-size:11px;letter-spacing:.16em;color:#74777d">CONTRACT ADDRESS</label>
+          <div style="display:flex;gap:8px">
+            <input id="market-mint" sc-camel-max-length="200" value="{{ ca }}" sc-camel-on-change="{{ onCa }}" sc-camel-on-key-down="{{ onCaKey }}" placeholder="Paste a Solana token CA" spellcheck="false" sc-camel-auto-complete="off" sc-camel-auto-capitalize="off" style="flex:1;min-width:0;height:48px;padding:0 14px;background:#ffffff;border:1px solid #d4d4cf;border-radius:12px;color:#0b0c0e;font-family:'Geist Mono',monospace;font-size:13.5px;outline:none" style-focus="border-color:#0b0c0e">
+            <button sc-camel-on-click="{{ check }}" style="height:48px;padding:0 16px;background:#0b0c0e;color:#ffffff;border:0;border-radius:999px;font-weight:600;font-size:14px;cursor:pointer" style-hover="background:#33363c">Check</button>
+          </div>
+          <div style="display:flex;flex-wrap:wrap;gap:6px 16px;font-family:'Geist Mono',monospace;font-size:11.5px;color:#74777d">
+            <span>try:</span>
+            <sc-for list="{{ examples }}" as="x" hint-placeholder-count="3">
+              <button sc-camel-on-click="{{ x.pick }}" style="background:none;border:0;padding:0;color:#5f6268;font:inherit;cursor:pointer;text-decoration:underline;text-underline-offset:3px" style-hover="color:#0b0c0e">{{ x.label }}</button>
+            </sc-for>
+          </div>
+        </div>
+        <p aria-live="polite" style="position:absolute;width:1px;height:1px;margin:-1px;padding:0;border:0;overflow:hidden;clip-path:inset(50%);white-space:nowrap">{{ liveMsg }}</p>
+
+        <sc-if value="{{ stChecking }}" hint-placeholder-val="{{ false }}">
+          <div style="padding:14px;border:1px solid #e3e3df;font-family:'Geist Mono',monospace;font-size:12.5px;color:#5f6268;display:flex;align-items:center;gap:10px"><span data-pulse="1" style="flex:none;width:6px;height:6px;border-radius:50%;background:#9ccc00"></span><span>Reading onchain pools for <span style="color:#0b0c0e">{{ checkingLabel }}</span>…</span></div>
+        </sc-if>
+        <sc-if value="{{ stError }}" hint-placeholder-val="{{ false }}">
+          <div style="padding:14px;border:1px solid #d4d4cf;font-family:'Geist Mono',monospace;font-size:12.5px;display:grid;gap:10px">
+            <div style="display:flex;justify-content:space-between;gap:12px"><span style="color:#0b0c0e">{{ checkTitle }}</span><span style="color:#5f6268">not checked</span></div>
+            <div style="color:#5f6268;line-height:1.5">{{ checkMessage }}</div>
+            <button sc-camel-on-click="{{ check }}" style="justify-self:start;height:34px;padding:0 12px;background:transparent;border:1px solid #d4d4cf;border-radius:999px;color:#0b0c0e;font:inherit;cursor:pointer" style-hover="border-color:#0b0c0e">Try again</button>
+          </div>
+        </sc-if>
+        <sc-if value="{{ stRejectedBare }}" hint-placeholder-val="{{ false }}">
+          <div style="padding:14px;border:1px solid rgba(196,60,60,.4);font-family:'Geist Mono',monospace;font-size:12.5px;display:grid;gap:6px">
+            <div style="display:flex;justify-content:space-between;gap:12px"><span style="color:#0b0c0e">{{ checkTitle }}</span><span style="color:#c43c3c">rejected</span></div>
+            <div style="color:#5f6268;line-height:1.5">{{ checkMessage }}</div>
+          </div>
+        </sc-if>
+        <sc-if value="{{ hasTok }}" hint-placeholder-val="{{ false }}">
+          <div style="display:grid;gap:8px">
+            <div style="border:1px solid #e3e3df;border-radius:14px;overflow:hidden;background:#ffffff;font-family:'Geist Mono',ui-monospace,monospace">
+              <div style="display:flex;align-items:center;gap:12px;padding:14px">
+                
+                <span aria-hidden="true" style="position:relative;flex:none;width:42px;height:42px;border-radius:50%;overflow:hidden;background:#ececea;display:grid;place-items:center;font-size:16px;font-weight:600;color:#0b0c0e">{{ tok.initial }}{{ tokImg }}</span>
+                <div style="flex:1;min-width:0;display:grid;gap:5px">
+                  <div style="display:flex;align-items:baseline;gap:8px;min-width:0">
+                    <span style="flex:none;font-family:'Geist',ui-sans-serif,system-ui,sans-serif;font-size:18px;font-weight:600;letter-spacing:-.02em;color:#0b0c0e">{{ tok.tk }}</span>
+                    <span style="min-width:0;font-size:12px;color:#6b6e74;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">{{ tok.name }}</span>
+                  </div>
+                  <div style="display:flex;flex-wrap:wrap;align-items:center;gap:4px 10px;font-size:11.5px;color:#74777d">
+                    <button aria-label="{{ copyAria }}" sc-camel-on-click="{{ copyMint }}" style="background:none;border:0;padding:0;font:inherit;color:#5f6268;cursor:pointer" style-hover="color:#0b0c0e">{{ tok.short }} <span style="color:{{ copyColor }}">{{ copyLabel }}</span></button>
+                    <span>{{ tok.dexLabel }}</span>
+                    <span>{{ tok.ageLabel }}</span>
+                  </div>
+                </div>
+                <span style="flex:none;align-self:flex-start;display:inline-flex;align-items:center;gap:6px;font-size:10px;letter-spacing:.16em;color:#3f7a00"><span data-pulse="1" style="width:6px;height:6px;border-radius:50%;background:#9ccc00"></span>LIVE</span>
+              </div>
+              <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(108px,1fr));gap:1px;background:#e8e8e4;border-top:1px solid #e8e8e4;border-bottom:1px solid #e8e8e4">
+                <sc-for list="{{ tok.stats }}" as="st" hint-placeholder-count="4">
+                  <div style="background:#ffffff;padding:10px 14px;display:grid;gap:5px;min-width:0">
+                    <span style="font-size:10.5px;letter-spacing:.16em;color:#74777d">{{ st.k }}</span>
+                    <span style="font-size:15px;color:#0b0c0e;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">{{ st.v }}</span>
+                  </div>
+                </sc-for>
+              </div>
+              <div style="display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:1px;background:#e8e8e4;border-bottom:1px solid #e8e8e4">
+                <sc-for list="{{ tok.changes }}" as="ch" hint-placeholder-count="4">
+                  <div style="background:#ffffff;padding:8px 4px;display:grid;justify-items:center;gap:3px">
+                    <span style="font-size:10px;letter-spacing:.14em;color:#74777d">{{ ch.k }}</span>
+                    <span style="font-size:12.5px;color:{{ ch.c }}">{{ ch.v }}</span>
+                  </div>
+                </sc-for>
+              </div>
+              <div style="padding:12px 14px;display:grid;gap:8px;border-bottom:1px solid #e8e8e4;font-size:11.5px">
+                <div style="display:flex;flex-wrap:wrap;justify-content:space-between;gap:4px 12px">
+                  <span style="color:#74777d;letter-spacing:.14em">TXNS 24H <span style="color:#0b0c0e;letter-spacing:0">{{ tok.txns }}</span></span>
+                  <span><span style="color:#3f7a00">{{ tok.buys }} buys</span> <span style="color:#9a9ca1">·</span> <span style="color:#c43c3c">{{ tok.sells }} sells</span></span>
+                </div>
+                <div aria-hidden="true" style="height:3px;display:flex;gap:2px"><span style="width:{{ tok.buyPct }};background:#9ccc00"></span><span style="flex:1;background:{{ tok.sellBar }}"></span></div>
+              </div>
+              <div style="display:flex;flex-wrap:wrap;justify-content:space-between;gap:8px 16px;padding:11px 14px;font-size:11.5px">
+                <div style="display:flex;flex-wrap:wrap;gap:4px 14px">
+                  <sc-for list="{{ tok.links }}" as="l" hint-placeholder-count="2"><a href="{{ l.url }}" target="_blank" rel="noopener noreferrer" style="color:#5f6268;text-decoration:underline;text-underline-offset:3px" style-hover="color:#0b0c0e">{{ l.label }}</a></sc-for>
+                </div>
+                <div style="display:flex;flex-wrap:wrap;gap:4px 14px">
+                  <sc-for list="{{ tok.terminals }}" as="tl" hint-placeholder-count="4"><a href="{{ tl.url }}" target="_blank" rel="noopener noreferrer" style="color:#0b0c0e" style-hover="color:#3f7a00">{{ tl.label }} ↗</a></sc-for>
+                </div>
+              </div>
+            </div>
+            <p class="nyes-preview-note" style="margin:0">{{ tok.source }}</p>
+          </div>
+          <div style="border:1px solid {{ verdict.border }};border-radius:12px;font-family:'Geist Mono',monospace;font-size:12.5px">
+            <div style="display:flex;justify-content:space-between;align-items:baseline;gap:12px;padding:12px 14px;border-bottom:1px solid #e8e8e4">
+              <span style="font-size:11px;letter-spacing:.16em;color:#74777d">LISTING RULES</span>
+              <span style="color:{{ verdict.color }}">{{ verdict.label }}</span>
+            </div>
+            <sc-for list="{{ rules }}" as="r" hint-placeholder-count="4">
+              <div style="display:flex;flex-wrap:wrap;justify-content:space-between;gap:4px 12px;padding:10px 14px;border-bottom:1px solid #ececea">
+                <span style="display:flex;gap:10px;min-width:0"><span aria-hidden="true" style="flex:none;width:12px;color:{{ r.c }}">{{ r.mark }}</span><span style="color:#5f6268">{{ r.k }} <span style="color:#74777d">{{ r.need }}</span></span></span>
+                <span style="margin-left:auto;color:{{ r.vc }}">{{ r.v }}</span>
+              </div>
+            </sc-for>
+            <div style="padding:12px 14px;color:#5f6268;font-size:12px;line-height:1.55"><span style="color:#0b0c0e">{{ verdict.title }}</span> {{ verdict.note }}</div>
+          </div>
+        </sc-if>
+        <sc-if value="{{ stOk }}" hint-placeholder-val="{{ false }}">
+          <div style="display:grid;gap:18px">
+            <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:14px">
+              <div style="display:grid;gap:8px">
+                <label for="market-strike" style="font-family:'Geist Mono',monospace;font-size:11px;letter-spacing:.16em;color:#74777d">STRIKE · ABOVE</label>
+                <input id="market-strike" sc-camel-max-length="32" sc-camel-input-mode="decimal" aria-invalid="{{ strikeInvalid }}" aria-describedby="strike-hint" value="{{ strike }}" sc-camel-on-change="{{ onStrike }}" style="height:44px;padding:0 12px;background:#ffffff;border:1px solid #d4d4cf;border-radius:12px;color:#0b0c0e;font-family:'Geist Mono',monospace;font-size:13.5px;outline:none" style-focus="border-color:#0b0c0e">
+              </div>
+              <div style="display:grid;gap:8px">
+                <label style="font-family:'Geist Mono',monospace;font-size:11px;letter-spacing:.16em;color:#74777d">CLOCK</label>
+                <div style="display:flex;gap:6px">
+                  <sc-for list="{{ clockOpts }}" as="c" hint-placeholder-count="3">
+                    <button sc-camel-on-click="{{ c.pick }}" style="flex:1;height:44px;background:transparent;border:1px solid {{ c.border }};color:{{ c.color }};border-radius:999px;font-family:'Geist Mono',monospace;font-size:13px;cursor:pointer">{{ c.label }}</button>
+                  </sc-for>
+                </div>
+              </div>
+            </div>
+            <div style="padding:14px 0 0;border-top:1px solid #e8e8e4;font-size:15px;line-height:1.45;color:#5f6268">“Will {{ tokTk }} be above <span style="font-family:'Geist Mono',monospace;color:#0b0c0e">${{ strike }}</span> in <span style="color:#0b0c0e">{{ clockLong }}</span>?” The planned opener fee is 1% of the settled pool.</div>
+            <p id="strike-hint" class="nyes-preview-note" style="margin:0">Prefilled with the last DEX price. Enter a price greater than zero.</p>
+            <sc-if value="{{ stReady }}" hint-placeholder-val="{{ true }}">
+              <button disabled="{{ strikeInvalid }}" sc-camel-on-click="{{ openMarket }}" style="height:52px;background:#0b0c0e;color:#ffffff;border:0;border-radius:999px;font-weight:600;font-size:15px;cursor:pointer" style-hover="background:#33363c">Preview market setup</button>
+            </sc-if>
+            <sc-if value="{{ stOpened }}" hint-placeholder-val="{{ false }}">
+              <div style="padding:14px;border:1px solid #d4d4cf;font-family:'Geist Mono',monospace;font-size:12.5px;color:#5f6268;display:grid;gap:10px">
+                <span style="color:#0b0c0e">Demo setup ready.</span>
+                <span>This is a preview. No market or transaction has been created.</span>
+              </div>
+            </sc-if>
+          </div>
+        </sc-if>
+      </div>
+    </div>
+  </div>
+</sc-if>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script="">
+class Component extends DCLogic {
+  static FEE_RATE = 0.015;
+  static LOCK_MS = 10000;
+  static MIN_LIQUIDITY = 250000;
+  static POOL_CAP = 0.02;
+  static LOOKUP_MS = 9000;
+  static DEX_API = 'https://api.dexscreener.com/';
+  // Same-origin fallback (api/dex.js) for browsers that cannot reach DexScreener directly.
+  static DEX_PROXY = '/api/dex?path=';
+  static EXAMPLES = [
+    { tk: 'BONK', mint: 'DezXAZ8z7PnrnRJjz3wXBoRgixCa6xjnB7YaB1pPB263' },
+    { tk: 'WIF', mint: 'EKpQGSJtjMFqKZ9KQanSqYXRcF8fBopzLHYxdM65zcjm' },
+    { tk: 'JUP', mint: 'JUPyiwrYJFskUPiHa7hkeR8VUtAeFoSYbKedZNsDvCN' },
+  ];
+  // SOL, USDC and USDT: when a pasted pool pairs one of these, the other side is the coin.
+  static QUOTES = ['So11111111111111111111111111111111111111112', 'EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v', 'Es9vMFrzaCERmJfrF4H2FYD4KCoNkY11McCe8BenwNYB'];
+  static DEXES = { raydium: 'Raydium', orca: 'Orca', meteora: 'Meteora', meteoradbc: 'Meteora DBC', pumpswap: 'PumpSwap', pumpfun: 'Pump.fun', launchlab: 'LaunchLab', fluxbeam: 'FluxBeam', lifinity: 'Lifinity', moonshot: 'Moonshot' };
+  static isAddress(v) { return typeof v === 'string' && /^[1-9A-HJ-NP-Za-km-z]{32,44}$/.test(v); }
+  static parseMint(input) {
+    // A bare mint, or the last address in a pasted GMGN, Axiom, Solscan or pump.fun link.
+    const runs = String(input || '').match(/[1-9A-HJ-NP-Za-km-z]+/g) || [];
+    return runs.filter(Component.isAddress).pop() || null;
+  }
+  static num(v) {
+    return (typeof v === 'number' || (typeof v === 'string' && v.trim() !== '')) && Number.isFinite(Number(v)) ? Number(v) : null;
+  }
+  static clean(v, max) { return String(v || '').replace(/[\u0000-\u001f\u007f\u200b-\u200f\u202a-\u202e\u2066-\u2069\ufeff]/g, '').trim().slice(0, max); }
+  static safeUrl(v) { return typeof v === 'string' && /^https:\/\/[^\s"'<>\\]+$/i.test(v.trim()) ? v.trim() : null; }
+  static usd(n) {
+    if (n == null) return '—';
+    for (const [d, s] of [[1e9, 'B'], [1e6, 'M'], [1e3, 'K']]) {
+      if (Math.abs(n) >= d * .9995) { const v = n / d; return '$' + v.toFixed(Math.abs(v) >= 99.95 ? 0 : Math.abs(v) >= 9.995 ? 1 : 2) + s; }
+    }
+    return '$' + n.toFixed(Math.abs(n) >= 99.5 ? 0 : 2);
+  }
+  static price(p) {
+    if (p == null || !(p > 0)) return '—';
+    if (p >= 1) return '$' + p.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: p >= 100 ? 2 : 4 });
+    const [m, e] = p.toExponential(3).split('e'), zeros = -Number(e) - 1;
+    if (zeros < 4) return '$' + p.toFixed(zeros + 4);
+    // DEX-terminal notation: $0.0₄2134 is 0.00002134, four zeros after the point.
+    return '$0.0' + String(zeros).replace(/\d/g, d => '₀₁₂₃₄₅₆₇₈₉'[d]) + m.replace('.', '');
+  }
+  static strikeFrom(p) {
+    if (!(p > 0)) return '';
+    const s = p.toFixed(Math.min(20, Math.max(0, 3 - Math.floor(Math.log10(p)))));
+    return s.includes('.') ? s.replace(/\.?0+$/, '') : s;
+  }
+  static age(ms) {
+    if (ms == null || ms < 0) return null;
+    const m = ms / 60000;
+    return m < 60 ? Math.max(1, Math.floor(m)) + 'm' : m < 1440 ? Math.floor(m / 60) + 'h' : m < 43200 ? Math.floor(m / 1440) + 'd' : m < 525600 ? Math.floor(m / 43200) + 'mo' : Math.floor(m / 525600) + 'y';
+  }
+  static pairsOf(json) { return Array.isArray(json) ? json : json && Array.isArray(json.pairs) ? json.pairs : json && json.pair ? [json.pair] : []; }
+  static links(info) {
+    const out = [], seen = new Set(), list = v => Array.isArray(v) ? v : [];
+    const add = (label, url) => { url = Component.safeUrl(url); if (url && !seen.has(url) && out.length < 3) { seen.add(url); out.push({ label, url }); } };
+    list(info.websites).forEach(w => add('Website', w && w.url));
+    list(info.socials).forEach(s => {
+      const type = Component.clean(s && (s.type || s.platform), 12).toLowerCase(), handle = s && s.handle;
+      const label = { twitter: 'X', x: 'X', telegram: 'Telegram', discord: 'Discord', tiktok: 'TikTok' }[type] || (type ? type[0].toUpperCase() + type.slice(1) : 'Link');
+      add(label, (s && s.url) || (handle && type === 'twitter' ? 'https://x.com/' + handle : handle && type === 'telegram' ? 'https://t.me/' + handle : null));
+    });
+    return out;
+  }
+  static summarize(pairs, mint) {
+    // One coin across all of its Solana pools, the way DEX terminals show it.
+    const num = Component.num, liq = p => num(p.liquidity && p.liquidity.usd) || 0;
+    const mine = pairs.filter(p => p && p.baseToken && p.quoteToken && (p.baseToken.address === mint || p.quoteToken.address === mint));
+    if (!mine.length) return null;
+    const based = mine.filter(p => p.baseToken.address === mint);
+    const main = (based.length ? based : mine).reduce((a, b) => liq(b) > liq(a) ? b : a);
+    const isBase = main.baseToken.address === mint, token = isBase ? main.baseToken : main.quoteToken;
+    const usd = num(main.priceUsd), native = num(main.priceNative);
+    let buys = 0, sells = 0;
+    for (const p of mine) {
+      const t = (p.txns && p.txns.h24) || {}, b = num(t.buys) || 0, s = num(t.sells) || 0;
+      if (p.baseToken.address === mint) { buys += b; sells += s; } else { buys += s; sells += b; }
+    }
+    const created = mine.map(p => num(p.pairCreatedAt)).filter(v => v > 0);
+    const info = main.info || (mine.find(p => p.info) || {}).info || {};
+    const change = isBase && main.priceChange || {};
+    const dexId = Component.clean(main.dexId, 20).toLowerCase();
+    const label = (Array.isArray(main.labels) ? main.labels : []).find(l => /^[A-Za-z0-9]{1,6}$/.test(l));
+    const pair = Component.isAddress(main.pairAddress) ? main.pairAddress : null;
+    // No reported liquidity is unknown, not zero.
+    const liquidity = mine.some(p => num(p.liquidity && p.liquidity.usd) != null) ? mine.reduce((t, p) => t + liq(p), 0) : null;
+    return {
+      mint, pair, symbol: Component.clean(token.symbol, 16) || '???', name: Component.clean(token.name, 48),
+      image: Component.safeUrl(info.imageUrl),
+      price: usd == null ? null : isBase ? usd : native ? usd / native : null,
+      marketCap: isBase ? num(main.marketCap) ?? num(main.fdv) : null,
+      liquidity, volume: mine.reduce((t, p) => t + (num(p.volume && p.volume.h24) || 0), 0),
+      buys, sells, pools: mine.length, createdAt: created.length ? Math.min(...created) : null,
+      dex: (Component.DEXES[dexId] || (dexId ? dexId[0].toUpperCase() + dexId.slice(1) : 'DEX')) + (label ? ' ' + label.toUpperCase() : ''),
+      change: { m5: num(change.m5), h1: num(change.h1), h6: num(change.h6), h24: num(change.h24) },
+      links: Component.links(info),
+      url: Component.safeUrl(main.url) || (pair ? 'https://dexscreener.com/solana/' + pair : null),
+      pass: liquidity != null && liquidity >= Component.MIN_LIQUIDITY,
+    };
+  }
+  static tokenView(t, now, fetchedAt, imgFailed) {
+    const pct = v => v == null ? '—' : (v > 0 ? '+' : '') + v.toFixed(Math.abs(v) >= 100 ? 0 : Math.abs(v) >= 10 ? 1 : 2) + '%';
+    const count = n => Math.round(n).toLocaleString('en-US'), total = t.buys + t.sells;
+    const age = Component.age(t.createdAt == null ? null : now - t.createdAt);
+    return {
+      tk: t.symbol[0] === '$' ? t.symbol : '$' + t.symbol, name: t.name,
+      initial: (Array.from(t.symbol.replace(/^\$/, ''))[0] || '?').toUpperCase(),
+      image: t.image, showImg: !!t.image && !imgFailed,
+      short: t.mint.slice(0, 4) + '…' + t.mint.slice(-4), dexLabel: t.dex, ageLabel: age ? age + ' old' : 'age unknown',
+      stats: [['PRICE', Component.price(t.price)], ['MCAP', Component.usd(t.marketCap)], ['LIQUIDITY', Component.usd(t.liquidity)], ['VOL 24H', Component.usd(t.volume)]].map(([k, v]) => ({ k, v })),
+      changes: [['5M', t.change.m5], ['1H', t.change.h1], ['6H', t.change.h6], ['24H', t.change.h24]].map(([k, v]) => ({ k, v: pct(v), c: v > 0 ? '#3f7a00' : v < 0 ? '#c43c3c' : '#6b6e74' })),
+      txns: count(total), buys: count(t.buys), sells: count(t.sells),
+      buyPct: total ? (t.buys / total * 100).toFixed(1) + '%' : '0%', sellBar: total ? '#e5484d' : '#d4d4cf',
+      links: t.links,
+      terminals: [
+        { label: 'DexScreener', url: t.url }, { label: 'GMGN', url: 'https://gmgn.ai/sol/token/' + t.mint },
+        { label: 'Axiom', url: t.pair && 'https://axiom.trade/meme/' + t.pair }, { label: 'Solscan', url: 'https://solscan.io/token/' + t.mint },
+      ].filter(x => x.url),
+      source: 'Live data from DexScreener · ' + (t.pools === 1 ? '1 pool' : t.pools + ' pools') + ' · fetched ' + new Date(fetchedAt).toLocaleTimeString('en-GB'),
+    };
+  }
+  static rules(t) {
+    const pass = t.pass, later = { v: 'checked at open', mark: '○', c: '#9a9ca1', vc: '#74777d' };
+    return [
+      { k: 'Onchain liquidity', need: '≥ $250K', v: t.liquidity == null ? 'not reported' : Component.usd(t.liquidity), mark: pass ? '✓' : '✕', c: pass ? '#3f7a00' : '#c43c3c', vc: pass ? '#3f7a00' : '#c43c3c' },
+      { k: 'Max pool per market', need: '2% of liquidity', v: pass ? Component.usd(t.liquidity * Component.POOL_CAP) : 'n/a', mark: '·', c: '#0b0c0e', vc: pass ? '#0b0c0e' : '#74777d' },
+      { k: 'Pyth price feed', need: 'live', ...later },
+      { k: 'Oracle confidence', need: '≤ 1% of price', ...later },
+    ];
+  }
+  static verdict(t) {
+    if (t.pass) return { label: 'passes liquidity', color: '#3f7a00', border: 'rgba(63,122,0,.4)', title: 'Deep enough to list.', note: 'Pyth feed and oracle confidence are checked when a market opens. Buys stop at the pool cap.', said: 'Passes the liquidity rule.' };
+    const base = { label: 'rejected', color: '#c43c3c', border: 'rgba(196,60,60,.4)' };
+    return t.liquidity == null
+      ? { ...base, title: 'No liquidity data.', note: 'DexScreener reports no liquidity for this coin’s pools, so it cannot pass the $250,000 rule.', said: 'Rejected, liquidity not reported.' }
+      : { ...base, title: 'Too thin to list.', note: 'NYES needs at least $250,000 of liquidity across the coin’s pools. A thin coin is cheap to push for ten seconds.', said: 'Rejected, below $250,000.' };
+  }
+  static quote(stake, yes, no, side) {
+    const sidePool = (side === 'YES' ? yes : no) + stake;
+    return sidePool > 0 ? (yes + no + stake) * (1 - Component.FEE_RATE) * stake / sidePool : 0;
+  }
+  static averagePrice(samples, start, end) {
+    // Time-weight a piecewise-constant simulated price, never samples after expiry.
+    const before = samples.filter(p => p.at <= start);
+    if (!before.length || end <= start) return null;
+    let price = before[before.length - 1].value, at = start, area = 0;
+    for (const point of samples) {
+      if (point.at <= start) continue;
+      if (point.at > end) break;
+      area += price * (point.at - at);
+      price = point.value; at = point.at;
+    }
+    return (area + price * (end - at)) / (end - start);
+  }
+  static validStrike(value) {
+    return /^(?:\d+(?:\.\d*)?|\.\d+)$/.test(value.trim()) && Number.isFinite(Number(value)) && Number(value) > 0;
+  }
+  static ROT = [
+    { tk: '$WIRE', mint: '7xK3…pQ9', strike: 0.00042, sLabel: '$0.00042', pd: 6 },
+    { tk: '$PYRE', mint: '4hQn…Lk2', strike: 0.0187, sLabel: '$0.0187', pd: 5 },
+    { tk: '$SNIP', mint: '9Fw2…xR7', strike: 0.00331, sLabel: '$0.00331', pd: 6 },
+    { tk: '$OXEN', mint: '2bVr…Tm4', strike: 0.0564, sLabel: '$0.0564', pd: 5 },
+  ];
+  static seed(m, end) {
+    const out = []; let p = m.strike * (1 + (Math.random() - .5) * .012);
+    for (let i = 0; i < 48; i++) { p += (m.strike - p) * .06 + m.strike * .0028 * (Math.random() - .5) * 2; out.push(p); }
+    if (end) { const d = end - out[out.length - 1]; out.forEach((v, i) => out[i] = v + d * (i / 47)); }
+    return out;
+  }
+  dialRef = React.createRef(); poolRef = React.createRef(); fillRef = React.createRef();
+  stampRef = React.createRef(); wordRef = React.createRef(); wordWrapRef = React.createRef();
+  tickerRef = React.createRef(); modalRef = React.createRef();
+  heroRef = React.createRef(); glowRef = React.createRef(); bandRef = React.createRef(); spinRef = React.createRef();
+  static EXTRA = [
+    { tk: '$HALO', strike: '$0.00207', off: 11, share: .57 }, { tk: '$BRIM', strike: '$0.0412', off: 47, share: .44 },
+    { tk: '$VOLT', strike: '$0.00088', off: 29, share: .69 }, { tk: '$CROW', strike: '$0.1165', off: 73, share: .51 },
+  ];
+  state = (() => {
+    const now = Date.now();
+    return {
+      mi: 0, id: 2291, dur: 90, deadline: now + 72000, now,
+      yes: 2654, no: 1626, prices: Component.seed(Component.ROT[0], 0.000418),
+      priceSamples: [{ at: now, value: 0.000418 }],
+      side: 'YES', phase: 'live', result: null, printed: null, settledAt: 0,
+      fill: null, fillKey: 0, wordSize: '30vw', wide: true,
+      modal: false, step: 'idle', ca: '', strike: '0.00042', clock: '90s',
+      prev: { tk: '$GRIT', id: 2290, strike: '$0.0131', printed: '0.01342', pool: '3,904', result: 'YES' },
+      tape: [
+        { id: 2291, live: true, tk: '$WIRE', strike: '$0.00042', mint: '7xK3…pQ9' },
+        { id: 2290, tk: '$GRIT', strike: '$0.0131', mint: '3pLm…Vc8', dur: '90s', pool: 3904, yes: .58, result: 'YES', printed: '0.01342' },
+        { id: 2289, tk: '$MOTH', strike: '$0.00918', mint: '8uTe…Ha1', dur: '5m', pool: 8112, yes: .66, result: 'NO', printed: '0.00907' },
+        { id: 2288, tk: '$KILN', strike: '$0.2140', mint: '5nRw…Zq3', dur: '90s', pool: 2377, yes: .47, result: 'NO', printed: '0.2131' },
+        { id: 2287, tk: '$DUSK', strike: '$0.00311', mint: '6jYc…Bd5', dur: '15m', pool: 21448, yes: .41, result: 'YES', printed: '0.00318' },
+        { id: 2286, tk: '$LOAF', strike: '$0.0877', mint: '2kFs…Wm7', dur: '90s', pool: 1932, yes: .53, result: 'YES', printed: '0.0881' },
+      ],
+    };
+  })();
+  componentDidMount() {
+    this.reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    this.pulsed = new WeakSet();
+    this.ticks = 0;
+    this.iv = setInterval(() => this.tick(), 250);
+    this.onResize = () => { this.setState({ wide: window.innerWidth >= 820, howCols: window.innerWidth >= 1000 ? 3 : 1 }); this.fit(); };
+    window.addEventListener('resize', this.onResize);
+    this.onResize();
+    this.onKey = e => {
+      if (this.state.modal) {
+        if (e.key === 'Escape') { e.preventDefault(); this.closePreview(); return; }
+        if (e.key === 'Tab') {
+          const dialog = this.modalRef.current;
+          if (!dialog) return;
+          const items = dialog ? [...dialog.querySelectorAll('a[href],button:not(:disabled),input:not(:disabled),[tabindex="0"]')].filter(el => el.getClientRects().length) : [];
+          const first = items[0], last = items[items.length - 1];
+          if (e.shiftKey && (document.activeElement === first || !dialog.contains(document.activeElement))) { e.preventDefault(); last && last.focus(); }
+          else if (!e.shiftKey && (document.activeElement === last || !dialog.contains(document.activeElement))) { e.preventDefault(); first && first.focus(); }
+        }
+        return;
+      }
+      const active = document.activeElement;
+      if (this.controlsLocked() || /INPUT|TEXTAREA|SELECT/.test(active && active.tagName) || (active && active.isContentEditable) || e.metaKey || e.ctrlKey || e.altKey) return;
+      if (e.key === 'y' || e.key === 'Y') this.setState({ side: 'YES' });
+      if (e.key === 'n' || e.key === 'N') this.setState({ side: 'NO' });
+    };
+    window.addEventListener('keydown', this.onKey);
+    if (!this.reduce) {
+      this.spinRef.current && this.spinRef.current.animate([{ transform: 'rotate(0)' }, { transform: 'rotate(360deg)' }], { duration: 90000, iterations: Infinity });
+      this.onMove = e => {
+        if (this.moveRaf) return;
+        this.moveRaf = requestAnimationFrame(() => {
+          this.moveRaf = 0;
+          const sec = this.heroRef.current, g = this.glowRef.current; if (!sec || !g) return;
+          const r = sec.getBoundingClientRect();
+          if (e.clientY > r.bottom || e.clientY < r.top) return;
+          g.style.setProperty('--mx', (e.clientX - r.left) + 'px'); g.style.setProperty('--my', (e.clientY - r.top) + 'px');
+        });
+      };
+      window.addEventListener('pointermove', this.onMove, { passive: true });
+    }
+    if (this.tickerRef.current && !this.reduce) this.tickerRef.current.animate([{ transform: 'translateX(0)' }, { transform: 'translateX(-50%)' }], { duration: 70000, iterations: Infinity });
+    (document.fonts ? document.fonts.ready : Promise.resolve()).then(() => this.fit());
+    if (document.fonts && document.fonts.load) document.fonts.load('700 100px Geist').then(() => this.fit()).catch(() => {});
+    if ('ResizeObserver' in window && this.wordWrapRef.current) { this.ro = new ResizeObserver(() => this.fit()); this.ro.observe(this.wordWrapRef.current); if (this.wordRef.current) this.ro.observe(this.wordRef.current); }
+    this.fitTimers = [300, 1000, 2500].map(t => setTimeout(() => this.fit(), t));
+    this.onLoad = () => this.fit(); window.addEventListener('load', this.onLoad);
+    this.applyPulse();
+    const dial = this.dialRef.current;
+    if (dial) this.sweepTimer = setTimeout(() => this.setSweep(), this.reduce ? 0 : 450);
+    if (this.reduce) return;
+    const ease = 'cubic-bezier(.16,1,.3,1)';
+    document.querySelectorAll('[data-in]').forEach(el => {
+      const d = +el.dataset.in || 0, k = el.dataset.k || 'rise';
+      const kf = {
+        line: [{ transform: 'translateY(108%)' }, { transform: 'none' }],
+        dial: [{ opacity: 0, transform: 'translate(-50%,-50%) scale(.9) rotate(-24deg)' }, { opacity: 1, transform: 'translate(-50%,-50%)' }],
+        card: [{ opacity: 0, transform: 'translateY(36px)' }, { opacity: 1, transform: 'none' }],
+        peek: [{ opacity: 0, transform: 'translateY(60px)' }, { opacity: 1, transform: 'none' }],
+        rise: [{ opacity: 0, transform: 'translateY(16px)' }, { opacity: 1, transform: 'none' }],
+      }[k];
+      el.animate(kf, { duration: k === 'dial' ? 2200 : k === 'line' ? 1200 : 1000, delay: d, easing: ease, fill: 'backwards' });
+    });
+    if ('IntersectionObserver' in window) {
+      const hidden = new Map();
+      const io = new IntersectionObserver(es => es.forEach(e => {
+        if (!e.isIntersecting) return;
+        const el = e.target; io.unobserve(el);
+        const h = hidden.get(el); if (h) h.cancel();
+        el.animate([{ opacity: 0, transform: 'translateY(28px)' }, { opacity: 1, transform: 'none' }], { duration: 1000, delay: +el.dataset.rv || 0, easing: ease, fill: 'backwards' });
+      }), { rootMargin: '0px 0px -8% 0px', threshold: .08 });
+      document.querySelectorAll('[data-rv]').forEach(el => {
+        if (el.getBoundingClientRect().top < window.innerHeight) return;
+        hidden.set(el, el.animate([{ opacity: 0, transform: 'translateY(28px)' }, { opacity: 0, transform: 'translateY(28px)' }], { duration: 1, fill: 'forwards' }));
+        io.observe(el);
+      });
+      this.io = io;
+    }
+  }
+  componentWillUnmount() { this.cancelCheck(); clearTimeout(this.copyT); this.ro && this.ro.disconnect(); this.onMove && window.removeEventListener('pointermove', this.onMove); cancelAnimationFrame(this.moveRaf); (this.fitTimers || []).forEach(clearTimeout); clearTimeout(this.sweepTimer); window.removeEventListener('load', this.onLoad); if (this._modalWas) document.body.style.overflow = this._bodyOverflow; clearInterval(this.iv); clearTimeout(this.nextT); window.removeEventListener('resize', this.onResize); window.removeEventListener('keydown', this.onKey); clearTimeout(this.checkT); this.io && this.io.disconnect(); }
+  componentDidUpdate() {
+    this.setSweep();
+    this.applyPulse();
+    const cur = this.state;
+    const ps = this._snap || { fillKey: cur.fillKey, phase: cur.phase, tape: cur.tape };
+    this._snap = { fillKey: cur.fillKey, phase: cur.phase, tape: cur.tape };
+    if (ps.fillKey !== this.state.fillKey && !this.reduce) {
+      this.poolRef.current && this.poolRef.current.animate([{ color: this.state.fill.side === 'YES' ? '#d6ff3f' : '#ff4d4d' }, { color: '#edede7' }], { duration: 900, easing: 'ease-out' });
+      this.fillRef.current && this.fillRef.current.animate([{ opacity: 0, transform: 'translateY(6px)' }, { opacity: 1, transform: 'none', offset: .15 }, { opacity: 1, offset: .7 }, { opacity: 0, transform: 'translateY(-4px)' }], { duration: 1600, easing: 'ease-out' });
+    }
+    if (cur.modal && !this._modalWas && this.modalRef.current) {
+      this._bodyOverflow = document.body.style.overflow;
+      document.body.style.overflow = 'hidden';
+      if (!this.reduce) {
+        this.modalRef.current.animate([{ opacity: 0 }, { opacity: 1 }], { duration: 240, easing: 'ease-out' });
+        const card = this.modalRef.current.firstElementChild;
+        card && card.animate([{ opacity: 0, transform: 'translateY(16px)' }, { opacity: 1, transform: 'none' }], { duration: 500, easing: 'cubic-bezier(.16,1,.3,1)' });
+      }
+      const inp = this.modalRef.current.querySelector('input'); inp && inp.focus();
+    } else if (!cur.modal && this._modalWas) {
+      document.body.style.overflow = this._bodyOverflow;
+      this._returnFocus && this._returnFocus.isConnected && this._returnFocus.focus();
+    }
+    this._modalWas = cur.modal;
+    if (ps.phase !== this.state.phase && this.state.phase === 'settled' && this.stampRef.current && !this.reduce) {
+      this.stampRef.current.animate([{ opacity: 0 }, { opacity: 1 }], { duration: 400, easing: 'ease-out' });
+    }
+    if (ps.tape[0].id !== this.state.tape[0].id && !this.reduce) {
+      const el = document.querySelector('[data-row="' + this.state.tape[0].id + '"]');
+      el && el.animate([{ background: 'rgba(214,255,63,.10)' }, { background: 'rgba(214,255,63,0)' }], { duration: 1600, easing: 'ease-out' });
+    }
+  }
+  applyPulse() {
+    if (this.reduce) return;
+    document.querySelectorAll('[data-pulse]').forEach(el => {
+      if (this.pulsed.has(el)) return; this.pulsed.add(el);
+      el.animate([{ opacity: 1 }, { opacity: .2 }, { opacity: 1 }], { duration: 1400, iterations: Infinity, easing: 'ease-in-out' });
+    });
+  }
+  setSweep() {
+    const d = this.dialRef.current; if (!d) return;
+    const s = this.state, left = this.left();
+    const deg = s.phase === 'settled' ? 360 : ((s.dur - left) / s.dur) * 360;
+    const v = deg.toFixed(2) + 'deg';
+    if (this.lastSweep !== v) { this.lastSweep = v; d.style.setProperty('--sweep', v); d.style.transition = '--sweep 900ms cubic-bezier(.2,.8,.2,1)'; }
+  }
+  fit() {
+    const w = this.wordWrapRef.current, t = this.wordRef.current; if (!w || !t) return;
+    const cur = parseFloat(getComputedStyle(t).fontSize), tw = t.getBoundingClientRect().width;
+    if (!tw) return;
+    const next = cur * (w.clientWidth / tw);
+    if (Math.abs(next - cur) > .5) this.setState({ wordSize: next.toFixed(1) + 'px' }, () => requestAnimationFrame(() => this.fit()));
+  }
+  closePreview() { this.cancelCheck(); this.setState({ modal: false }); }
+  controlsLocked() { return this.state.phase !== 'live' || this.left() <= Component.LOCK_MS / 1000; }
+  cancelCheck() {
+    this.checkId = (this.checkId || 0) + 1;
+    clearTimeout(this.checkT);
+    if (this.checkCtl) this.checkCtl.abort();
+    this.checkCtl = null;
+  }
+  async dex(path, signal) {
+    const get = async url => {
+      const res = await fetch(url, { signal, headers: { accept: 'application/json' } });
+      if (!res.ok) throw Object.assign(new Error('HTTP ' + res.status), { status: res.status });
+      return res.json();
+    };
+    try { return await get(Component.DEX_API + path); } catch (error) {
+      if (signal.aborted) throw error;
+      try { return await get(Component.DEX_PROXY + encodeURIComponent(path)); } catch (proxyError) { throw signal.aborted ? proxyError : error; }
+    }
+  }
+  async lookup(address, signal) {
+    let mint = address, pairs = Component.pairsOf(await this.dex('token-pairs/v1/solana/' + mint, signal));
+    if (!pairs.length) {
+      // Axiom links and pasted pool addresses point at a pool, not at the mint.
+      const pool = Component.pairsOf(await this.dex('latest/dex/pairs/solana/' + address, signal))[0];
+      const side = pool && pool.baseToken && pool.quoteToken && (Component.QUOTES.includes(pool.baseToken.address) ? pool.quoteToken : pool.baseToken);
+      if (side && Component.isAddress(side.address) && side.address !== address) {
+        mint = side.address;
+        pairs = Component.pairsOf(await this.dex('token-pairs/v1/solana/' + mint, signal));
+      }
+    }
+    return Component.summarize(pairs, mint);
+  }
+  async runCheck(input) {
+    const raw = String(input ?? this.state.ca).trim(), mint = Component.parseMint(raw);
+    this.cancelCheck();
+    if (!raw) { this.setState({ step: 'idle', token: null, check: null }); return; }
+    if (!mint) {
+      this.setState({ ca: raw, step: 'rejected', token: null, check: { title: 'Not a Solana address', message: 'Paste the token’s contract address (32 to 44 characters), or a GMGN, Axiom, Solscan or pump.fun link.' } });
+      return;
+    }
+    const id = this.checkId, ctl = new AbortController();
+    this.checkCtl = ctl;
+    this.checkT = setTimeout(() => ctl.abort(), Component.LOOKUP_MS);
+    this.setState({ ca: raw, step: 'checking', checking: mint, token: null, check: null, copied: null, imgFailed: false });
+    try {
+      const token = await this.lookup(mint, ctl.signal);
+      if (id !== this.checkId) return;
+      if (!token) {
+        this.setState({ step: 'rejected', check: { title: 'No Solana pools found', message: 'DexScreener lists no pools for this address. The coin may be too new or untraded, or this is not a token mint. Without onchain liquidity it cannot be listed.' } });
+        return;
+      }
+      this.setState({ ca: token.mint, step: token.pass ? 'ok' : 'rejected', token, fetchedAt: Date.now(), strike: Component.strikeFrom(token.price) });
+    } catch (error) {
+      if (id !== this.checkId) return;
+      const limited = error && error.status === 429;
+      this.setState({ step: 'error', check: {
+        title: limited ? 'Too many lookups' : 'Live data unavailable',
+        message: limited ? 'DexScreener is limiting requests right now. Wait a minute and try again.'
+          : ctl.signal.aborted ? 'DexScreener took too long to answer. Try again.' : 'Could not reach DexScreener. Check your connection and try again.',
+      } });
+    } finally {
+      if (id === this.checkId) { clearTimeout(this.checkT); this.checkCtl = null; }
+    }
+  }
+  left(s = this.state) { return Math.max(0, Math.ceil((s.deadline - s.now) / 1000)); }
+  tick() {
+    const now = Date.now(); this.ticks++;
+    this.setState(s => {
+      const m = Component.ROT[s.mi];
+      const ns = { now };
+      if (s.phase === 'live') {
+        if (this.ticks % 2 === 0 && now <= s.deadline) {
+          const last = s.prices[s.prices.length - 1];
+          const target = m.strike * (1 + .011 * Math.sin(now / 7000) + .006 * Math.sin(now / 2300));
+          const p = last + (target - last) * .08 + m.strike * .0022 * (Math.random() - .5) * 2;
+          ns.prices = s.prices.slice(1).concat(p);
+          ns.priceSamples = s.priceSamples.concat({ at: now, value: p }).slice(-100);
+        }
+        if (now < s.deadline - Component.LOCK_MS && Math.random() < .17) {
+          const last = s.prices[s.prices.length - 1];
+          const pYes = Math.min(.78, Math.max(.22, .55 + (last - m.strike) / m.strike * 22));
+          const side = Math.random() < pYes ? 'YES' : 'NO';
+          const amt = Math.round(10 + Math.random() * Math.random() * 140);
+          if (side === 'YES') ns.yes = s.yes + amt; else ns.no = s.no + amt;
+          ns.fill = { side, amt }; ns.fillKey = s.fillKey + 1;
+        }
+        if (now >= s.deadline) {
+          const twap = Component.averagePrice(s.priceSamples, s.deadline - Component.LOCK_MS, s.deadline) ?? s.prices[s.prices.length - 1];
+          const result = twap > m.strike ? 'YES' : 'NO', printed = twap.toFixed(m.pd);
+          const pool = s.yes + s.no;
+          ns.phase = 'settled'; ns.result = result; ns.printed = printed; ns.settledAt = now;
+          ns.prev = { tk: m.tk, id: s.id, strike: m.sLabel, printed, pool: Math.round(pool).toLocaleString('en-US'), result };
+          ns.tape = s.tape.map(r => r.live ? { id: s.id, tk: m.tk, strike: m.sLabel, mint: m.mint, dur: '90s', pool: Math.round(pool), yes: s.yes / pool, result, printed } : r);
+        }
+      } else if (now - s.settledAt > 4800) {
+        const mi = (s.mi + 1) % Component.ROT.length, nm = Component.ROT[mi], id = s.id + 1;
+        Object.assign(ns, {
+          mi, id, dur: 90, deadline: now + 90000, phase: 'live', result: null, printed: null,
+          yes: Math.round(140 + Math.random() * 120), no: Math.round(110 + Math.random() * 110),
+          prices: Component.seed(nm), priceSamples: [{ at: now, value: nm.strike }], side: s.side,
+          tape: [{ id, live: true, tk: nm.tk, strike: nm.sLabel, mint: nm.mint }].concat(s.tape).slice(0, 6),
+        });
+      }
+      return ns;
+    });
+  }
+  renderVals() {
+    const v = this.renderValsBase();
+    v.sideTape = v.tape;
+    v.phoneTape = v.tape.filter(r => !r.live).slice(0, 2);
+    return v;
+  }
+  renderValsBase() {
+    const s = this.state, m = Component.ROT[s.mi];
+    const tv = s.token ? Component.tokenView(s.token, s.now, s.fetchedAt, s.imgFailed) : null;
+    const left = this.left(), pool = s.yes + s.no, yesShare = s.yes / pool;
+    const settled = s.phase === 'settled';
+    const controlsLocked = this.controlsLocked(), locked = !settled && controlsLocked;
+    const stake = s.stake || 25, netReturn = Component.quote(stake, s.yes, s.no, s.side);
+    const pr = s.prices, all = pr.concat(m.strike);
+    let lo = Math.min(...all), hi = Math.max(...all); const pad = (hi - lo) * .15 || m.strike * .002; lo -= pad; hi += pad;
+    const y = v => (44 - ((v - lo) / (hi - lo)) * 44).toFixed(1);
+    const last = pr[pr.length - 1], up = last >= m.strike;
+    const fmt = n => Math.round(n).toLocaleString('en-US');
+    const pct = v => Math.round(v * 100) + '%';
+    const liveRow = { clock: `${String(Math.floor(left / 60)).padStart(2, '0')}:${String(left % 60).padStart(2, '0')}`, pool: fmt(pool), yesW: pct(yesShare), share: pct(yesShare) };
+    return {
+      m, id: s.id, wide: s.wide, wordSize: s.wordSize, controlsLocked,
+      marketLabel: settled ? 'SETTLED' : locked ? 'LOCKED' : 'DEMO',
+      windowLabel: locked ? 'Buys locked · settlement window' : settled ? 'Example settled' : 'Buys lock with 10s left',
+      netMultiple: (netReturn / stake).toFixed(2),
+      dialRef: this.dialRef, poolRef: this.poolRef, fillRef: this.fillRef, stampRef: this.stampRef, wordRef: this.wordRef, wordWrapRef: this.wordWrapRef,
+      mm: String(Math.floor(left / 60)).padStart(2, '0'), ss: String(left % 60).padStart(2, '0'),
+      colonOp: settled || ((s.deadline - s.now) % 1000) > 500 ? 1 : .25,
+      elapsedPct: (settled ? 100 : ((s.dur - left) / s.dur) * 100).toFixed(2) + '%',
+      sparkPts: pr.map((v, i) => `${(i * 132 / (pr.length - 1)).toFixed(1)},${y(v)}`).join(' '),
+      strikeY: y(m.strike), lastY: y(last), lastColor: up ? '#d6ff3f' : '#ff4d4d', lastArrow: up ? '▲' : '▼', lastLabel: last.toFixed(m.pd),
+      yesPct: pct(yesShare), noPct: pct(1 - yesShare), yesAmt: fmt(s.yes), noAmt: fmt(s.no), poolLabel: fmt(pool),
+      side: s.side, yesSel: s.side === 'YES', noSel: s.side === 'NO',
+      pickYes: () => { if (!this.controlsLocked()) this.setState({ side: 'YES' }); }, pickNo: () => { if (!this.controlsLocked()) this.setState({ side: 'NO' }); },
+      stakes: [10, 25, 100].map(v => ({ label: v + ' USDC', selected: stake === v, border: (s.stake || 25) === v ? '#edede7' : '#2a2d33', color: (s.stake || 25) === v ? '#edede7' : '#8b8d91', pick: () => { if (!this.controlsLocked()) this.setState({ stake: v }); } })),
+      netPay: netReturn.toFixed(2) + ' USDC',
+      fillYes: !!s.fill && s.fill.side === 'YES', fillNo: !!s.fill && s.fill.side === 'NO', fillAmt: s.fill ? s.fill.amt : '',
+      isSettled: settled, resYes: s.result === 'YES', resNo: s.result === 'NO', printed: s.printed,
+      paidOut: (pool * .985).toLocaleString('en-US', { maximumFractionDigits: 2, minimumFractionDigits: 2 }),
+      prev: { ...s.prev, isYes: s.prev.result === 'YES', isNo: s.prev.result === 'NO' },
+      tickerRef: this.tickerRef, modalRef: this.modalRef,
+      howCols: s.howCols || 3,
+      heroRef: this.heroRef, glowRef: this.glowRef, bandRef: this.bandRef, spinRef: this.spinRef,
+      how: (() => {
+        const t = this.reduce ? 99999 : s.now % 7200, mint = '7xK3…pQ9';
+        const n = Math.min(mint.length, Math.floor(t / 220));
+        const checked = t > 2400, rejected = t > 3000;
+        const ci = this.reduce ? 0 : Math.floor(s.now / 1800) % 3, cl = ['90s', '5m', '15m'];
+        const rt = this.reduce ? 99999 : s.now % 8400;
+        const rows = [['printed', '0.000431 > 0.00042', '#0b0c0e'], ['result', '▲ YES', '#3f7a00'], ['paid', '4,215.80 USDC', '#0b0c0e'], ['opener', '+42.80', '#0b0c0e'], ['protocol', '+21.40', '#0b0c0e'], ['market', 'closed', '#5f6268']];
+        return {
+          typed: mint.slice(0, n),
+          okLabel: checked ? 'listed' : 'checking', okColor: checked ? '#3f7a00' : '#74777d',
+          badLabel: rejected ? 'rejected' : 'checking', badColor: rejected ? '#c43c3c' : '#74777d',
+          clocks: cl.map((l, i) => ({ l, b: i === ci ? '#0b0c0e' : '#d4d4cf', c: i === ci ? '#0b0c0e' : '#5f6268' })),
+          clockLong: ['90 seconds', '5 minutes', '15 minutes'][ci],
+          receipt: rows.map(([k, v, c], i) => ({ k, v, c, o: rt > 600 + i * 520 ? 1 : 0.08 })),
+        };
+      })(),
+      ticker: (() => {
+        const sec = Math.floor(s.now / 1000);
+        const items = s.tape.map(r => r.live
+          ? { tk: r.tk, strike: r.strike, live: true, clock: liveRow.clock, share: liveRow.share }
+          : { tk: r.tk, strike: r.strike, isYes: r.result === 'YES', isNo: r.result === 'NO', pool: fmt(r.pool) });
+        Component.EXTRA.forEach((x, i) => {
+          const l = 90 - ((sec + x.off) % 90);
+          items.splice(i * 2 + 1, 0, { tk: x.tk, strike: x.strike, live: true, clock: `0${Math.floor(l / 60)}:${String(l % 60).padStart(2, '0')}`, share: pct(x.share + Math.sin((s.now / 1000 + x.off) / 9) * .04) });
+        });
+        return items.concat(items);
+      })(),
+      modalOpen: s.modal,
+      openModal: e => { e && e.preventDefault(); this.cancelCheck(); this._returnFocus = e && e.currentTarget || document.activeElement; this.setState({ modal: true, step: 'idle', ca: '', strike: '', clock: '90s', token: null, check: null, copied: null }); },
+      closeModal: () => this.closePreview(),
+      stop: e => e.stopPropagation(),
+      ca: s.ca, strike: s.strike,
+      onCa: e => { this.cancelCheck(); this.setState({ ca: e.target.value, step: 'idle', token: null, check: null }); },
+      onCaKey: e => { if (e.key === 'Enter') this.runCheck(); },
+      onStrike: e => this.setState({ strike: e.target.value, step: 'ok' }),
+      check: () => this.runCheck(),
+      examples: Component.EXAMPLES.map(x => ({ label: x.tk, pick: () => this.runCheck(x.mint) })),
+      checkingLabel: s.checking ? s.checking.slice(0, 4) + '…' + s.checking.slice(-4) : '',
+      checkTitle: s.check ? s.check.title : '', checkMessage: s.check ? s.check.message : '',
+      hasTok: !!tv, tok: tv,
+      tokImg: tv && tv.showImg ? React.createElement('img', { src: tv.image, alt: '', width: 42, height: 42, decoding: 'async', referrerPolicy: 'no-referrer', onError: () => this.setState({ imgFailed: true }), style: { position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover' } }) : null, tokTk: tv ? tv.tk : '',
+      rules: s.token ? Component.rules(s.token) : [],
+      verdict: s.token ? Component.verdict(s.token) : null,
+      liveMsg: s.step === 'checking' ? 'Checking the coin…'
+        : tv ? tv.tk + ': liquidity ' + (s.token.liquidity == null ? 'not reported' : Component.usd(s.token.liquidity)) + '. ' + Component.verdict(s.token).said
+        : s.check ? s.check.title + '. ' + s.check.message : '',
+      onImgError: () => this.setState({ imgFailed: true }),
+      copyMint: async () => {
+        if (!s.token) return;
+        let copied = 'fail';
+        try { await navigator.clipboard.writeText(s.token.mint); copied = 'ok'; } catch (error) {}
+        this.setState({ copied });
+        clearTimeout(this.copyT); this.copyT = setTimeout(() => this.setState({ copied: null }), 1600);
+      },
+      copyLabel: s.copied === 'ok' ? 'copied' : s.copied === 'fail' ? 'copy failed' : 'copy',
+      copyColor: s.copied === 'ok' ? '#3f7a00' : s.copied === 'fail' ? '#c43c3c' : '#9a9ca1',
+      copyAria: s.token ? 'Copy contract address ' + s.token.mint : 'Copy contract address',
+      strikeInvalid: !Component.validStrike(s.strike),
+      stepNum: s.step === 'ok' ? 2 : s.step === 'opened' ? 3 : 1,
+      stChecking: s.step === 'checking', stError: s.step === 'error', stRejectedBare: s.step === 'rejected' && !s.token,
+      stOk: s.step === 'ok' || s.step === 'opened', stReady: s.step === 'ok', stOpened: s.step === 'opened',
+      openMarket: () => { if (s.step === 'ok' && Component.validStrike(s.strike)) this.setState({ step: 'opened' }); },
+      clockLong: { '90s': '90 seconds', '5m': '5 minutes', '15m': '15 minutes' }[s.clock],
+      clockOpts: ['90s', '5m', '15m'].map(c => ({ label: c, border: c === s.clock ? '#0b0c0e' : '#d4d4cf', color: c === s.clock ? '#0b0c0e' : '#5f6268', pick: () => this.setState({ clock: c, step: s.step === 'opened' ? 'ok' : s.step }) })),
+      tape: (s.tape.map(r => r.live
+        ? { ...r, ...liveRow, done: false }
+        : { ...r, live: false, done: true, clock: r.dur, pool: fmt(r.pool), yesW: pct(r.yes), isYes: r.result === 'YES', isNo: r.result === 'NO' })
+      ).map(r => {
+        const open = s.openRow === r.id;
+        const f2 = n => n.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+        let receipt;
+        if (r.live) {
+          receipt = [
+            { k: 'STATE', v: locked ? 'locked' : 'demo open', c: '#3f7a00' }, { k: 'LOCKS AT', v: '00:10 left', c: '#0b0c0e' },
+            { k: 'STRIKE', v: 'above ' + r.strike, c: '#0b0c0e' }, { k: 'LAST', v: last.toFixed(m.pd), c: up ? '#3f7a00' : '#c43c3c' },
+            { k: 'YES NET', v: (pool * .985 / s.yes).toFixed(2) + '×', c: '#0b0c0e' }, { k: 'NO NET', v: (pool * .985 / s.no).toFixed(2) + '×', c: '#0b0c0e' },
+          ];
+        } else {
+          const raw = s.tape.find(t => t.id === r.id), P = raw.pool, win = r.result === 'YES' ? raw.yes : 1 - raw.yes;
+          receipt = [
+            { k: 'TWAP · 10s', v: r.printed + (r.isYes ? ' > ' : ' ≤ ') + r.strike.slice(1), c: '#0b0c0e' },
+            { k: 'RESULT', v: r.result, c: r.isYes ? '#3f7a00' : '#c43c3c' },
+            { k: 'PAID TO WINNERS', v: f2(P * .985), c: '#0b0c0e' },
+            { k: 'NET MULTIPLE', v: (.985 / win).toFixed(2) + '×', c: '#0b0c0e' },
+            { k: 'OPENER 1%', v: '+' + f2(P * .01), c: '#0b0c0e' },
+            { k: 'PROTOCOL 0.5%', v: '+' + f2(P * .005), c: '#0b0c0e' },
+          ];
+        }
+        const toggle = () => this.setState({ openRow: this.state.openRow === r.id ? null : r.id });
+        return { ...r, open, sign: open ? '−' : '+', receipt, accessibleLabel: r.tk + ' example market breakdown', toggle, onKey: e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); toggle(); } } };
+      }),
+    };
+  }
+}
+</script>
+
+
+</body></html>

@@ -1,0 +1,14 @@
+{
+  "name": "oqqo",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Oqqo: a read-only readout protocol for Solana.",
+  "type": "module",
+  "license": "MIT",
+  "engines": { "node": ">=20" },
+  "scripts": {
+    "build": "node tools/build.mjs",
+    "gates": "node tools/gates.mjs",
+    "serve": "node tools/serve.mjs"
+  }
+}

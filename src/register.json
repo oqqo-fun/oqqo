@@ -1,0 +1,58 @@
+{
+  "version": 1,
+  "note": "One record per external fact. state is stated, absent or unconfirmed. Only stated records may render a link or a value. statedOn stays internal and is never rendered.",
+  "records": {
+    "chain": {
+      "label": "Chain",
+      "value": "Solana mainnet",
+      "state": "stated",
+      "source": "client statement",
+      "statedOn": "2026-10-07"
+    },
+    "rpc": {
+      "label": "RPC",
+      "value": "https://solana-rpc.publicnode.com",
+      "state": "stated",
+      "source": "client statement",
+      "statedOn": "2026-10-07"
+    },
+    "contract": {
+      "label": "Contract",
+      "value": null,
+      "state": "absent",
+      "format": "solana-base58-32-44",
+      "source": "client confirmed 2026-10-07",
+      "statedOn": "2026-10-07"
+    },
+    "x": {
+      "label": "X",
+      "value": null,
+      "state": "absent",
+      "source": "client statement",
+      "statedOn": "2026-10-07"
+    },
+    "github": {
+      "label": "GitHub",
+      "value": null,
+      "state": "absent",
+      "source": "client statement",
+      "statedOn": "2026-10-07"
+    },
+    "lockedValueFeed": {
+      "label": "Locked value feed",
+      "value": "https://api.llama.fi",
+      "slug": "solana",
+      "state": "stated",
+      "source": "build brief",
+      "statedOn": "2026-10-07"
+    },
+    "pairsFeed": {
+      "label": "Pairs feed",
+      "value": "https://api.dexscreener.com",
+      "tag": "solana",
+      "state": "stated",
+      "source": "build brief",
+      "statedOn": "2026-10-07"
+    }
+  }
+}

@@ -1,0 +1,382 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Oqqo · Call the move before the clock does</title>
+<meta name="description" content="Oqqo opens quick rounds on Solana coins. Back YES or NO, watch a countdown run out, and the closing price decides who splits the stakes.">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://oqqo.fun/">
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<link rel="apple-touch-icon" href="/assets/logo-dark.jpg">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Oqqo">
+<meta property="og:title" content="Oqqo · Call the move before the clock does">
+<meta property="og:description" content="Quick YES-or-NO rounds on Solana coins, read live from the chain.">
+<meta property="og:url" content="https://oqqo.fun/">
+<meta property="og:image" content="https://oqqo.fun/assets/cover.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<!--@CSP-->
+<!--@META-->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&amp;family=Geist+Mono:wght@400;500;600&amp;display=swap">
+<link rel="stylesheet" href="/css/tokens.css">
+<link rel="stylesheet" href="/css/base.css">
+<script src="/js/boot.js"></script>
+<script type="module" src="/js/main.js"></script>
+</head>
+<body id="top">
+<svg class="sprite" width="0" height="0" aria-hidden="true" focusable="false">
+  <symbol id="oqqo-mark" viewBox="0 0 100 100">
+    <circle cx="50" cy="50" r="44.5" fill="none" stroke="currentColor" stroke-width="11" stroke-dasharray="148.4 6 125.2"/>
+    <circle cx="50" cy="50" r="31.5" fill="none" stroke="currentColor" stroke-width="9.3" stroke-dasharray="104.7 5 88.2"/>
+  </symbol>
+</svg>
+<a class="skip tap" href="#market">Skip to the simulator</a>
+<div class="progress" aria-hidden="true"></div>
+
+<div class="top">
+  <header class="head">
+    <div class="head-in shell">
+      <a class="brand tap" href="#top" aria-label="Oqqo home"><svg class="mark" viewBox="0 0 100 100" aria-hidden="true"><use href="#oqqo-mark"/></svg><span class="word">Oqqo</span></a>
+      <nav class="nav" aria-label="Primary">
+        <a href="#pairs">Coins</a>
+        <a href="#method">Rounds</a>
+        <a href="#principles">Principles</a>
+        <a href="#builders">Builders</a>
+      </nav>
+      <div class="head-end">
+        <a class="btn btn-dark btn-sm cta-head" href="#market">Try the simulator</a>
+        <!--@SOCIAL-->
+        <details class="menu">
+          <summary class="tap" aria-label="Navigation menu"><span class="burger" aria-hidden="true"><span></span><span></span></span></summary>
+          <nav aria-label="Mobile navigation">
+            <a href="#market">Simulator</a>
+            <a href="#pairs">Coins</a>
+            <a href="#method">Rounds</a>
+            <a href="#principles">Principles</a>
+            <a href="#builders">Builders</a>
+          </nav>
+        </details>
+      </div>
+    </div>
+  </header>
+  <!--@CA-->
+</div>
+
+<div class="ticker is-loading" aria-label="Busiest Solana pairs, scrolling">
+  <div class="ticker-track" id="ticker-track">
+    <div class="tk"><span class="sk">SOL</span><span class="sk">$000.00</span><span class="sk">0.00%</span></div>
+    <div class="tk"><span class="sk">JUP</span><span class="sk">$0.0000</span><span class="sk">0.00%</span></div>
+    <div class="tk"><span class="sk">BONK</span><span class="sk">$0.0000</span><span class="sk">0.00%</span></div>
+    <div class="tk"><span class="sk">WIF</span><span class="sk">$0.0000</span><span class="sk">0.00%</span></div>
+    <div class="tk"><span class="sk">RAY</span><span class="sk">$0.0000</span><span class="sk">0.00%</span></div>
+    <div class="tk"><span class="sk">ORCA</span><span class="sk">$0.0000</span><span class="sk">0.00%</span></div>
+    <div class="tk"><span class="sk">PYTH</span><span class="sk">$0.0000</span><span class="sk">0.00%</span></div>
+    <div class="tk"><span class="sk">JTO</span><span class="sk">$0.0000</span><span class="sk">0.00%</span></div>
+  </div>
+</div>
+
+<main>
+<section id="hero" class="hero">
+  <canvas id="field" class="field" aria-hidden="true"></canvas>
+  <div class="hero-wash" aria-hidden="true"></div>
+  <div class="shell hero-in">
+    <a class="badge rise" href="#market">
+      <span class="pill" data-health role="status" data-state="connecting"><span class="dot" aria-hidden="true"></span><span data-health-label>Connecting</span></span>
+      <span class="badge-t">Solana slot <b class="mono sk" data-bind="slot">0000000000</b></span>
+      <span class="badge-a" aria-hidden="true">›</span>
+    </a>
+    <h1 class="h1">
+      <span class="ln"><span class="ln-in ln-a">Call the move</span></span>
+      <span class="ln"><span class="ln-in ln-b">before the clock does.</span></span>
+    </h1>
+    <p class="lede rise rise-3">Oqqo opens quick rounds on Solana coins. Back YES or NO, watch a countdown run out, and the closing price decides who splits the stakes.</p>
+    <div class="actions rise rise-4">
+      <a class="btn btn-dark btn-lg" href="#market">Try the simulator</a>
+      <a class="link-a" href="#pairs">Browse coins in play <span aria-hidden="true">›</span></a>
+    </div>
+  </div>
+
+  <div class="shell stage-wrap" id="market">
+    <div class="stage card-rise">
+      <div class="win">
+        <div class="win-bar">
+          <div class="win-dots" aria-hidden="true"><i></i><i></i><i></i></div>
+          <span class="win-url mono">oqqo.fun/rounds</span>
+          <span></span>
+        </div>
+        <div class="win-grid">
+          <div class="win-main" id="sim">
+            <div class="win-head mono">
+              <span class="win-tag"><span class="dot" aria-hidden="true"></span>LIVE ROUND</span>
+              <span class="win-sym" id="m-sym">SOL</span>
+              <span class="win-slot">SLOT <span class="sk" data-bind="slot">0000000000</span></span>
+            </div>
+            <p class="note mono">SIMULATOR · Prices are live, stakes and pools are play money. No funds move.</p>
+            <div class="win-q">Closes above <span id="m-strike" class="mono sk">$000.00</span> when the clock ends?</div>
+            <div class="clock-row">
+              <div>
+                <div class="eyebrow mono">ROUND ENDS IN</div>
+                <div class="clock mono" id="m-clock" aria-live="off">01:30</div>
+              </div>
+              <div class="spark-box mono">
+                <div class="eyebrow">LIVE PRICE</div>
+                <div class="px-now" id="m-now">&#8212;</div>
+              </div>
+            </div>
+            <div class="rhythm" id="m-bar" aria-hidden="true"><i></i></div>
+            <div class="sides" role="group" aria-label="Choose a side">
+              <button class="side side-yes" type="button" id="m-yes" aria-pressed="false"><span class="fill" aria-hidden="true"></span><span class="side-l">YES</span><span class="side-p mono" id="m-yes-p">50%</span></button>
+              <button class="side side-no" type="button" id="m-no" aria-pressed="false"><span class="fill" aria-hidden="true"></span><span class="side-l">NO</span><span class="side-p mono" id="m-no-p">50%</span></button>
+            </div>
+            <div class="pool-box mono">
+              <div class="pool-row">
+                <span class="eyebrow">POOL</span>
+                <span class="pool-n" id="m-pool">0</span>
+                <span class="pool-u">play USDC</span>
+                <span class="pool-add" id="m-add"></span>
+              </div>
+              <div class="est" id="m-est">Choose a side to see a sample return.</div>
+              <div class="stakes">
+                <span class="eyebrow">STAKE</span>
+                <button class="chip-b" type="button" data-stake="5" aria-pressed="true">5</button>
+                <button class="chip-b" type="button" data-stake="20" aria-pressed="false">20</button>
+                <button class="chip-b" type="button" data-stake="75" aria-pressed="false">75</button>
+              </div>
+            </div>
+            <div class="win-foot mono"><span>Each bar mirrors how stakes are spread, nothing more.</span></div>
+            <div class="stamp" id="m-stamp" hidden>
+              <div class="stamp-in">
+                <span class="stamp-t mono">ROUND CLOSED</span>
+                <span class="stamp-r" id="m-result">YES</span>
+                <span class="stamp-s mono" id="m-print"></span>
+                <span class="stamp-n mono">NEXT ROUND OPENING</span>
+              </div>
+            </div>
+          </div>
+          <aside class="win-side mono">
+            <div class="side-head"><span>COINS IN PLAY</span><span class="chip">LIVE FEED</span></div>
+            <div class="side-table">
+              <div class="shead"><span>COIN</span><span>PRICE</span><span>24H VOL</span></div>
+              <div id="side-rows">
+                <div class="srow"><span class="sk">SOL</span><span class="sk">$000.00</span><span class="sk">$0.00M</span></div>
+                <div class="srow"><span class="sk">JUP</span><span class="sk">$0.0000</span><span class="sk">$0.00M</span></div>
+                <div class="srow"><span class="sk">BONK</span><span class="sk">$0.0000</span><span class="sk">$0.00M</span></div>
+                <div class="srow"><span class="sk">WIF</span><span class="sk">$0.0000</span><span class="sk">$0.00M</span></div>
+                <div class="srow"><span class="sk">RAY</span><span class="sk">$0.0000</span><span class="sk">$0.00M</span></div>
+                <div class="srow"><span class="sk">ORCA</span><span class="sk">$0.0000</span><span class="sk">$0.00M</span></div>
+              </div>
+            </div>
+            <div class="side-card">
+              <div class="sc-row"><span class="sc-tag">LAST</span><span class="sc-name" id="m-last">No round closed yet</span></div>
+              <div class="sc-row sub"><span>Chain TVL <span class="sk" data-bind="tvl">$0.00B</span></span><span>Node <span class="sk" data-bind="latency">000 ms</span></span></div>
+            </div>
+          </aside>
+        </div>
+      </div>
+
+      <div class="phone" aria-hidden="true">
+        <div class="phone-in">
+          <div class="phone-screen">
+            <div class="phone-notch"></div>
+            <div class="phone-status"><span>Live</span><span class="batt"><i></i></span></div>
+            <div class="phone-top"><span class="phone-word">Oqqo</span><span class="chip">SIMULATOR</span></div>
+            <div class="phone-card">
+              <div class="pc-row mono"><span class="pc-live"><span class="dot"></span>LIVE ROUND</span><span data-mirror="sym">SOL</span></div>
+              <div class="pc-q">Closes above the strike?</div>
+              <div class="eyebrow mono">ROUND ENDS IN</div>
+              <div class="pc-clock mono" data-mirror="clock">01:30</div>
+              <div class="rhythm rhythm-s"><i></i></div>
+              <div class="pc-pill mono pc-yes"><span>YES</span><span data-mirror="yes">50%</span></div>
+              <div class="pc-pill mono"><span>NO</span><span data-mirror="no">50%</span></div>
+            </div>
+            <div class="phone-rows" id="phone-rows">
+              <div class="prow"><span class="sk">SOL</span><span class="sk">$000.00</span></div>
+              <div class="prow"><span class="sk">JUP</span><span class="sk">$0.0000</span></div>
+            </div>
+            <div class="phone-bar"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="numbers" aria-label="Key numbers">
+  <div class="shell">
+    <div class="stat-row">
+      <div class="stat" data-rv="0"><span class="stat-n">1:30</span><span class="stat-l">Length of every round</span></div>
+      <div class="stat" data-rv="60"><span class="stat-n"><span class="sk" data-bind="slot">0000000000</span></span><span class="stat-l">Current Solana slot</span></div>
+      <div class="stat" data-rv="120"><span class="stat-n"><span class="sk" data-bind="tvl">$0.00B</span></span><span class="stat-l">Value locked across the chain</span></div>
+      <div class="stat" data-rv="180"><span class="stat-n"><span class="sk" data-bind="lead-vol">$0.00M</span></span><span class="stat-l">Day volume of the busiest pair</span></div>
+    </div>
+  </div>
+</section>
+
+<section class="anchors" aria-label="Network facts">
+  <div class="shell">
+    <div class="tiles">
+      <!--@TILES-->
+    </div>
+  </div>
+</section>
+
+<section id="method" class="band">
+  <div class="shell pad-lg">
+    <div data-rv="0">
+      <div class="kicker">How a round runs</div>
+      <h2 class="h2">Open, call, close. Nothing in between.</h2>
+    </div>
+    <div class="cards3">
+      <article class="card" data-rv="0">
+        <div class="card-n mono"><span>01</span><span class="rule"></span></div>
+        <h3 class="h3">Choose a coin.</h3>
+        <p class="card-p">Any pair with real depth on Solana can host a round. Shallow books are left out.</p>
+        <div class="mini mono">
+          <div class="mini-r"><span>busiest pair</span><span class="ink"><span class="sk" data-bind="lead-sym">SOLANA leads</span></span></div>
+          <div class="mini-r"><span>day volume</span><span class="ink"><span class="sk" data-bind="lead-vol">$0.00M</span></span></div>
+          <div class="mini-r"><span>chain value</span><span class="ink"><span class="sk" data-bind="tvl">$0.00B</span></span></div>
+        </div>
+      </article>
+      <article class="card" data-rv="120">
+        <div class="card-n mono"><span>02</span><span class="rule"></span></div>
+        <h3 class="h3">Make the call.</h3>
+        <p class="card-p">The strike is the last traded price. You back YES or NO before the lock and the pool shows where everyone stands.</p>
+        <div class="mini mono">
+          <div class="mini-r"><span>strike</span><span class="ink" data-mirror="strike">&#8212;</span></div>
+          <div class="mini-r"><span>window</span><span class="ink">ninety seconds</span></div>
+          <div class="mini-r"><span>sides</span><span class="ink">YES or NO</span></div>
+        </div>
+      </article>
+      <article class="card" data-rv="240">
+        <div class="card-n mono"><span>03</span><span class="rule"></span></div>
+        <h3 class="h3">Watch it close.</h3>
+        <p class="card-p">The clock hits zero, the final price is compared with the strike and the right side splits the stakes.</p>
+        <div class="mini mono">
+          <div class="backoff" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></div>
+          <div class="mini-r"><span>if a feed stalls</span><span class="ink">dash, then retry</span></div>
+          <div class="mini-r"><span>hidden tab</span><span class="ink">sleeps</span></div>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section id="why" class="why">
+  <div class="shell why-in">
+    <div data-rv="0">
+      <div class="kicker">Why short</div>
+      <h2 class="h2 h2-xl">A quick chain makes a quick round fair.</h2>
+    </div>
+    <div class="why-list">
+      <div class="why-i" data-rv="80"><span class="mono">A</span><p>Day-long markets bury a real move under noise.</p></div>
+      <div class="why-i" data-rv="160"><span class="mono">B</span><p>A single venue can run thin for a minute and mislead a call.</p></div>
+      <div class="why-i on" data-rv="240"><span class="mono">C</span><p>Confirmation lands in moments here, so a ninety-second window is workable.</p></div>
+    </div>
+  </div>
+</section>
+
+<section id="pairs" class="pairs">
+  <div class="shell pad-lg">
+    <div class="pairs-head" data-rv="0">
+      <div>
+        <div class="kicker">Coins in play</div>
+        <h2 class="h2">Pick what to call.</h2>
+      </div>
+      <div class="pairs-meta mono"><span class="dot" aria-hidden="true"></span>Live from DexScreener · tap a row for depth</div>
+    </div>
+    <div class="tabs" id="board-tabs" role="tablist" aria-label="Sort the board" data-rv="60">
+      <button class="tab tap" role="tab" type="button" data-mode="volume" aria-selected="true">Volume</button>
+      <button class="tab tap" role="tab" type="button" data-mode="move" aria-selected="false" tabindex="-1">Movement</button>
+      <button class="tab tap" role="tab" type="button" data-mode="depth" aria-selected="false" tabindex="-1">Depth</button>
+    </div>
+    <div class="board mono" data-rv="100">
+      <div class="board-head"><span>COIN</span><span>PRICE</span><span>24H VOLUME</span><span>24H MOVE</span></div>
+      <div id="board-rows" class="board-rows">
+        <div class="row-wrap"><div class="row"><div class="cell c-pair"><span class="logo sk"></span><span class="names"><span class="sk">SOLANA</span></span></div><div class="cell c-price"><span class="sk">$000.00</span></div><div class="cell c-vol"><span class="sk">$0.00M</span></div><div class="cell c-chg"><span class="sk">0.00%</span></div></div></div>
+        <div class="row-wrap"><div class="row"><div class="cell c-pair"><span class="logo sk"></span><span class="names"><span class="sk">SOLANA</span></span></div><div class="cell c-price"><span class="sk">$000.00</span></div><div class="cell c-vol"><span class="sk">$0.00M</span></div><div class="cell c-chg"><span class="sk">0.00%</span></div></div></div>
+        <div class="row-wrap"><div class="row"><div class="cell c-pair"><span class="logo sk"></span><span class="names"><span class="sk">SOLANA</span></span></div><div class="cell c-price"><span class="sk">$000.00</span></div><div class="cell c-vol"><span class="sk">$0.00M</span></div><div class="cell c-chg"><span class="sk">0.00%</span></div></div></div>
+        <div class="row-wrap"><div class="row"><div class="cell c-pair"><span class="logo sk"></span><span class="names"><span class="sk">SOLANA</span></span></div><div class="cell c-price"><span class="sk">$000.00</span></div><div class="cell c-vol"><span class="sk">$0.00M</span></div><div class="cell c-chg"><span class="sk">0.00%</span></div></div></div>
+        <div class="row-wrap"><div class="row"><div class="cell c-pair"><span class="logo sk"></span><span class="names"><span class="sk">SOLANA</span></span></div><div class="cell c-price"><span class="sk">$000.00</span></div><div class="cell c-vol"><span class="sk">$0.00M</span></div><div class="cell c-chg"><span class="sk">0.00%</span></div></div></div>
+        <div class="row-wrap"><div class="row"><div class="cell c-pair"><span class="logo sk"></span><span class="names"><span class="sk">SOLANA</span></span></div><div class="cell c-price"><span class="sk">$000.00</span></div><div class="cell c-vol"><span class="sk">$0.00M</span></div><div class="cell c-chg"><span class="sk">0.00%</span></div></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="principles" class="deep">
+  <div class="deep-glow" aria-hidden="true"></div>
+  <div class="shell deep-in">
+    <div class="deep-top">
+      <div data-rv="0"><div class="kicker kicker-d">Principles</div><h2 class="h2 h2-dark">Built so nobody has to be trusted.</h2></div>
+      <p class="deep-lede" data-rv="80">These are the design rules the rounds are written against. They describe intent, and they bind every release.</p>
+    </div>
+    <div class="cards-d">
+      <article class="card-d" data-rv="0"><span class="mono">01</span><h3>Self-custody.</h3><p>Stakes are held in an escrow owned by the round's program and leave only as winnings or handed-back stakes.</p></article>
+      <article class="card-d" data-rv="80"><span class="mono">02</span><h3>No referee.</h3><p>The closing price comes from a public feed. No operator key can overrule a closed round.</p></article>
+      <article class="card-d" data-rv="160"><span class="mono">03</span><h3>Refund on doubt.</h3><p>If the price source is stale or unsure, the round is voided and all stakes are handed back.</p></article>
+    </div>
+    <div class="facts mono" data-rv="0">
+      <div class="facts-l"><span>Slot cadence <b>every two seconds</b></span><span>Coin feed <b>every half minute</b></span><span>Hidden tab <b>polling sleeps</b></span></div>
+      <a class="facts-a" href="#builders">See the calls behind it ›</a>
+    </div>
+  </div>
+</section>
+
+<section id="builders" class="builders">
+  <div class="shell pad-lg builders-in">
+    <div data-rv="0">
+      <div class="kicker">For builders</div>
+      <h2 class="h2 h2-md">Read the same feeds this page reads.</h2>
+      <p class="builders-p">Everything live here comes from three plain HTTP calls. They are listed below, unadorned.</p>
+    </div>
+    <div class="code" data-rv="120">
+      <div class="code-bar mono"><span>feeds.http</span><span class="code-tag">NO KEY NEEDED</span></div>
+      <div class="code-body mono" role="img" aria-label="Three HTTP calls: getSlot on the node, the chains list from DefiLlama, and a pairs search from DexScreener">
+        <div><span class="k">POST</span> <span class="ink">solana-rpc.publicnode.com</span></div>
+        <div><span class="m">  {"method":"getSlot","params":[{"commitment":"confirmed"}]}</span></div>
+        <div><span class="k">GET </span> <span class="ink">api.llama.fi/v2/chains</span> <span class="m"> keep the entry named solana</span></div>
+        <div><span class="k">GET </span> <span class="ink">api.dexscreener.com/latest/dex/search?q=SOL USDC</span></div>
+        <div><span class="m">  keep chainId solana, sort by day volume</span></div>
+        <div><span class="k">ON FAIL</span> <span class="m"> show a dash, double the wait, add jitter</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="close-wrap">
+  <div class="close">
+    <div class="close-art" aria-hidden="true"><img class="close-logo" src="/assets/logo-light.png" alt="" width="760" height="760" loading="lazy" decoding="async"></div>
+    <div class="close-veil" aria-hidden="true"></div>
+    <div class="close-in">
+      <div class="close-live mono" data-rv="0"><span class="dot dot-ink" aria-hidden="true"></span><span>Slot <span class="sk" data-bind="slot">0000000000</span> · locked <span class="sk" data-bind="tvl">$0.00B</span></span></div>
+      <h2 class="h2 h2-close" data-rv="80">Somebody is about to misjudge the next minute and a half.</h2>
+      <div class="actions" data-rv="160">
+        <a class="btn btn-dark btn-lg" href="#market">Try the simulator</a>
+        <a class="link-a" href="#top">Back the opposite call <span aria-hidden="true">›</span></a>
+      </div>
+      <p class="close-p" data-rv="220"><b>No account. No wallet.</b> The simulator uses play money only.</p>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer class="foot">
+  <div class="shell foot-in">
+    <div class="foot-grid">
+      <div class="foot-brand">
+        <a class="brand tap" href="#top" aria-label="Oqqo home"><svg class="mark" viewBox="0 0 100 100" aria-hidden="true"><use href="#oqqo-mark"/></svg><span class="word">Oqqo</span></a>
+        <span class="foot-t">Short rounds on Solana.</span>
+        <span class="foot-s">oqqo.fun</span>
+      </div>
+      <nav class="foot-nav" aria-label="Product"><span>Product</span><a href="#market">Simulator</a><a href="#pairs">Coins</a><a href="#method">Rounds</a></nav>
+      <nav class="foot-nav" aria-label="Protocol"><span>Protocol</span><a href="#principles">Principles</a><a href="#builders">Builders</a><a href="#why">Why short</a></nav>
+    </div>
+    <p class="foot-legal">Availability depends on local law, and short-term pools are restricted in some places. Check yours before taking part. Figures on this page come from public feeds and can lag or fail.</p>
+    <div class="foot-end"><span>Oqqo</span><span>Simulator only. No funds move.</span></div>
+  </div>
+</footer>
+</body>
+</html>
